@@ -1,13 +1,8 @@
 package gdTicketsUaDesctop.businessObjects;
 
 import gdTicketsUaDesctop.utils.PropertyReader;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Random;
-
 import static gdTicketsUaDesctop.Constants.PROPERTY_LOCATION;
 import static java.lang.Integer.parseInt;
 
@@ -16,14 +11,10 @@ import static java.lang.Integer.parseInt;
  */
 public class Ticket {
 //============ Desired Ticket =============//
-    private String forwardDate;
+    private LocalDate forwardDate;
     private String forwardCity;
-    private int forwardDateRange;
-    private String backwardDate;
+    private LocalDate backwardDate;
     private String backwardCity;
-    private int backwardAfterDays;
-    private String round;
-    private static Calendar calendar = Calendar.getInstance();
 //============ Chosen Ticket ==============//
     public String trainNumber;
     public String trainNumberRound;
@@ -45,16 +36,14 @@ public class Ticket {
      */
     public Ticket(String fileLocation, String exactOrRandomDate) {
         PropertyReader propertyReader = new PropertyReader(PROPERTY_LOCATION + "ticket/" + fileLocation);
-        this.forwardDateRange = parseInt(propertyReader.getValue("departureDateRange"));
-        Date date = subtractMonth(new Date());
-        Date forwardDate = addDays(date, forwardDateRange, exactOrRandomDate);
-        this.forwardDate = formatDate(forwardDate, "dd.MM.yyyy");
-        this.backwardAfterDays = parseInt(propertyReader.getValue("backAfterDays"));
-        Date backwardDate = addDays(forwardDate, backwardAfterDays, exactOrRandomDate);
-        this.backwardDate = formatDate(backwardDate, "dd.MM.yyyy");
+        int forwardDateRange = parseInt(propertyReader.getValue("departureDateRange"));
+        this.forwardDate = addDays(LocalDate.now(), forwardDateRange, exactOrRandomDate);
+
+        int backwardAfterDays = parseInt(propertyReader.getValue("backAfterDays"));
+        this.backwardDate = addDays(forwardDate, backwardAfterDays, exactOrRandomDate);
+
         this.forwardCity = propertyReader.getValue("departureFrom");
         this.backwardCity = propertyReader.getValue("arrivalTo");
-        this.round = propertyReader.getValue("round");
     }
 
     /**
@@ -65,31 +54,13 @@ public class Ticket {
      * @param exactOrRandom = "random" or "exact"
      * @return new date
      */
-    private static Date addDays(Date date, int days, String exactOrRandom) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
+    private static LocalDate addDays(LocalDate date, int days, String exactOrRandom) {
         if (exactOrRandom.equals("random")) {
             Random ran = new Random();
             days = ran.nextInt(days);
         }
-        calendar.add(Calendar.DATE, days);
-        return calendar.getTime();
-    }
-
-    /** Subtract one month from current date,because first month
-     * on gd.tickets.us was began from '0'.
-     * @param date current date
-     * @return current data decreased on month
-     */
-    private static Date subtractMonth(Date date){
-        calendar.setTime(date);
-        calendar.add(Calendar.MONTH, -1);
-        return calendar.getTime();
-    }
-
-    private static String formatDate(Date date, String format) {
-        DateFormat dateFormat = new SimpleDateFormat(format);
-        return dateFormat.format(date);
+        date = date.plusDays(days);
+        return date;
     }
 
     public String getForwardCity() {
@@ -100,11 +71,11 @@ public class Ticket {
         return backwardCity;
     }
 
-    public String getForwardDate() {
+    public LocalDate getForwardDate() {
         return forwardDate;
     }
 
-    public String getBackwardDate() {
+    public LocalDate getBackwardDate() {
         return backwardDate;
     }
 

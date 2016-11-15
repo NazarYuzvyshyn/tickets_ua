@@ -4,6 +4,7 @@ import gdTicketsUaDesctop.utils.WaitFor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static gdTicketsUaDesctop.utils.Log.info;
@@ -57,11 +58,8 @@ public class PurchasePage {
                 .findFirst().isPresent();
     }
 
-    public boolean confirmDateAndCity(String date, String city) {
-        if (date.startsWith("0")) {
-            date = date.substring(1, 2);
-        } else date = date.substring(0, 2);
-        String day = " " + date + " ";
+    public boolean confirmDateAndCity(LocalDate date, String city) {
+        String day = " " + date.getDayOfMonth() + " ";
         List<WebElement> datesCities = getElements(dateAndCity);
         return datesCities.stream().map(WebElement::getText)
                 .filter((s) -> s.contains(day) && s.contains(city))

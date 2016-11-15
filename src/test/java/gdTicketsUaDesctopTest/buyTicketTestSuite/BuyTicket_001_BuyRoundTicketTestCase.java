@@ -31,8 +31,9 @@ public class BuyTicket_001_BuyRoundTicketTestCase extends DefaultTestCase {
 
         goTo(BASE_URL);
 
+        mainPage.getTicket();
         mainPage.getRoundTrip();
-        mainPage.searchTicket();
+        mainPage.search();
 
         resultPage.getRandomPlaceType(resultPage.getRandomTrain());
         resultPage.getRandomPlace();

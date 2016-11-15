@@ -3,12 +3,15 @@ package gdTicketsUaDesctop.pages;
 import gdTicketsUaDesctop.businessObjects.Ticket;
 import org.openqa.selenium.WebDriver;
 
+import java.time.LocalDate;
+
 import static gdTicketsUaDesctop.utils.CommonServices.pressKey;
 import static gdTicketsUaDesctop.utils.CommonServices.sleep;
 import static gdTicketsUaDesctop.utils.Log.info;
 import static gdTicketsUaDesctop.utils.WaitFor.*;
 import static gdTicketsUaDesctop.utils.WebElementServices.clickOn;
 import static gdTicketsUaDesctop.utils.WebElementServices.sendKeys;
+import static gdTicketsUaDesctop.utils.WebElementServices.sendKeysWithEnter;
 import static org.openqa.selenium.Keys.ENTER;
 
 /**
@@ -32,40 +35,32 @@ public class MainPage {
         this.ticket = ticket;
     }
 
-    public void searchTicket() {
-        inputCity("Откуда");
-        inputDate("Дата Откуда", ticket.getForwardDate());
-        clickOn("Поиск", submit);
-        waitForUrl("results");
-    }
-
-    public void inputCity(String point) {
-        if (point.contains("Откуда")) {
-            info("--------- Departure point ---------");
-            sendKeys(point, ticket.getForwardCity(), from);
-        } else sendKeys(point, ticket.getBackwardCity(), to);
-        sleep(1);
-        pressKey(ENTER);
-    }
-
-    public void inputDate(String name, String date) {
-        if (name.contains("Откуда")) clickOn(name, forwardDate);
-        else clickOn(name, backwardDate);
-        waitCondition(calendar, VISIBIL, 3);
-        String day;
-        if (date.startsWith("0")) {
-            day = date.substring(1, 2);
-        } else day = date.substring(0, 2);
-        String month = date.substring(3, 5);
-        String year = date.substring(6);
-        String xpath = "//*[@data-year='" + year + "' and @data-month='" + month + "']/*[text()='" + day + "']";
-        clickOn(date, xpath);
+    public void getTicket() {
+        info("--------- Departure point ---------");
+        sendKeysWithEnter("Откуда", ticket.getForwardCity(), from);
+        info("----------- Arrival point -----------");
+        sendKeysWithEnter("Куда", ticket.getBackwardCity(), to);
+        setDate(ticket.getForwardDate(), forwardDate);
     }
 
     public void getRoundTrip() {
         clickOn("'В обе стороны'", round);
-        info("----------- Arrival point -----------");
-        inputCity("Куда");
-        inputDate("Дата Куда", ticket.getBackwardDate());
+        setDate(ticket.getBackwardDate(), backwardDate);
     }
+
+    public void setDate(LocalDate date, String dateField){
+        clickOn("", dateField);
+        waitCondition(calendar, VISIBIL, 3);
+        String day = String.valueOf(date.getDayOfMonth());
+        String month = String.valueOf(date.getMonthValue() - 1);
+        String year = String.valueOf(date.getYear());
+        String xpath = "//*[@data-year='" + year + "' and @data-month='" + month + "']/*[text()='" + day + "']";
+        clickOn(date.toString(), xpath);
+    }
+
+    public void search(){
+        clickOn("Поиск", submit);
+        waitForUrl("results");
+    }
+
 }

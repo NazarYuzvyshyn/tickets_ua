@@ -5,7 +5,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import static gdTicketsUaDesctop.utils.CommonServices.getUrl;
 import static gdTicketsUaDesctop.utils.WebDriverFactory.getDriver;
 import static gdTicketsUaDesctop.utils.WebElementServices.*;

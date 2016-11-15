@@ -5,9 +5,12 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+import static gdTicketsUaDesctop.utils.CommonServices.pressKey;
+import static gdTicketsUaDesctop.utils.CommonServices.sleep;
 import static gdTicketsUaDesctop.utils.Log.info;
 import static gdTicketsUaDesctop.utils.WaitFor.*;
 import static gdTicketsUaDesctop.utils.WebDriverFactory.getDriver;
+import static org.openqa.selenium.Keys.ENTER;
 
 
 /**
@@ -20,6 +23,12 @@ public class WebElementServices {
         getElement(locator).click();
         getElement(locator).sendKeys(inputText);
         info("\"" + inputText + " \" has been send to \"" + name + "\" " + locator);
+    }
+
+    public static void sendKeysWithEnter(String name, String inputText, String locator){
+        sendKeys(name, inputText, locator);
+        sleep(1);
+        pressKey(ENTER);
     }
 
     public static void clickOn(String name, String locator) {
