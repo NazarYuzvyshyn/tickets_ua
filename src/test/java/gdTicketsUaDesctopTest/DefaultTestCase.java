@@ -35,9 +35,9 @@ public class DefaultTestCase {
     @AfterTest
     public void afterTest(ITestContext context) {
         if (context.getFailedTests().size() > 0 || context.getSkippedTests().size() > 0) {
+            takeScreenshot(testCaseName, getUrl());
             Log.error("TestCase: \"" + testCaseName + "\" FAILED.");
         }
-        takeScreenshot(testCaseName, getUrl());
         clearCookies();
         WebDriverFactory.killDriver();
         Log.info("Browser has been closed");

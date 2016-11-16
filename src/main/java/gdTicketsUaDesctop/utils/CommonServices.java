@@ -74,7 +74,7 @@ public class CommonServices {
         }
     }
 
-    @Attachment("{0} {1}")
+    @Attachment(value = "{0} failed test screenshot", type = "image/png")
     public static void takeScreenshot(String testCaseName, String message) {
 
         try {
@@ -88,7 +88,7 @@ public class CommonServices {
             g.drawString("URL: " + message, 50, 100);
             g.dispose();
 
-            ImageIO.write(image, "png", new File("target/screenshots/" + screenshotName));
+            ImageIO.write(image, "png", new File("tickets_ua/target/screenshots/" + screenshotName));
 
             Log.info("");
             Log.warn("Screenshot captured.");
