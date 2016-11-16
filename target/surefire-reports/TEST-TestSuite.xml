@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="1" name="TestSuite" time="48.989" errors="0" skipped="0">
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="TestSuite" time="62.696" tests="1" errors="0" skipped="0" failures="1">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
-    <property name="suite.name" value="testng-suites\buyTicket-suite.xml"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_66\jre\bin"/>
     <property name="java.vm.version" value="25.66-b18"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
@@ -23,11 +22,11 @@
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_66\jre\lib\endorsed"/>
     <property name="os.arch" value="x86"/>
     <property name="java.io.tmpdir" value="C:\Users\Nazar\AppData\Local\Temp\"/>
-    <property name="line.separator" value="
-"/>
+    <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 7"/>
+    <property name="suiteXmlFile" value="tickets_ua\testng-suites\buyTicket-suite.xml"/>
     <property name="classworlds.conf" value="D:\PROGRAMMIROVANIE\MY_JAVA\apache-maven-3.3.9\bin\m2.conf"/>
     <property name="sun.jnu.encoding" value="Cp1251"/>
     <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_66\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\PROGRAMMIROVANIE\MY_JAVA\apache-maven-3.3.9\bin;C:\Program Files\Java\jdk1.8.0_66;C:\Program Files\Git\cmd;C:\Program Files;C:\Program Files\Skype\Phone\;D:\ANDROIDsdk\tools;D:\ANDROIDsdk\platform-tools;C:\Program Files\nodejs\;D:\PROGRAMMIROVANIE\MY_JAVA\pycharmProjects\newproj\drivers\firefox;C:\Users\Nazar\AppData\Local\Programs\Python\Python35-32\Scripts\;C:\Users\Nazar\AppData\Local\Programs\Python\Python35-32\;C:\Users\Nazar\AppData\Roaming\npm;D:\PROGRAMMIROVANIE\MY_JAVA\apache-maven-3.3.9\bin;D:\PROGRAMMIROVANIE\MY_JAVA\pycharmProjects\newproj\drivers\firefox;."/>
@@ -45,7 +44,7 @@
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="32"/>
     <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_66\jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dsuite.name=testng-suites\buyTicket-suite.xml clean test"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean test -DsuiteXmlFile=tickets_ua\testng-suites\buyTicket-suite.xml"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="ru"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -64,75 +63,60 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86"/>
   </properties>
-  <testcase classname="gdTicketsUaDesctopTest.buyTicketTestSuite.BuyTicket_001_BuyRoundTicketTestCase" name="test_001" time="48.989">
-    <failure type="java.lang.NullPointerException">java.lang.NullPointerException
-	at java.lang.String.contains(String.java:2133)
-	at gdTicketsUaDesctop.pages.PurchasePage.lambda$confirmTrain$7(PurchasePage.java:57)
-	at java.util.stream.MatchOps$1MatchSink.accept(MatchOps.java:90)
-	at java.util.stream.ReferencePipeline$11$1.accept(ReferencePipeline.java:373)
-	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
-	at java.util.ArrayList$ArrayListSpliterator.tryAdvance(ArrayList.java:1351)
-	at java.util.stream.ReferencePipeline.forEachWithCancel(ReferencePipeline.java:126)
-	at java.util.stream.AbstractPipeline.copyIntoWithCancel(AbstractPipeline.java:498)
-	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:485)
-	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
-	at java.util.stream.MatchOps$MatchOp.evaluateSequential(MatchOps.java:230)
-	at java.util.stream.MatchOps$MatchOp.evaluateSequential(MatchOps.java:196)
-	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
-	at java.util.stream.ReferencePipeline.anyMatch(ReferencePipeline.java:449)
-	at gdTicketsUaDesctop.pages.PurchasePage.confirmTrain(PurchasePage.java:57)
-	at gdTicketsUaDesctopTest.buyTicketTestSuite.BuyTicket_001_BuyRoundTicketTestCase.test_001(BuyTicket_001_BuyRoundTicketTestCase.java:46)
+  <testcase name="test_001" classname="gdTicketsUaDesctopTest.buyTicketTestSuite.BuyTicket_001_BuyRoundTicketTestCase" time="29.36">
+    <failure message="org.openqa.selenium.TimeoutException: Timed out after 15 seconds waiting for gdTicketsUaDesctop.utils.WaitFor$$Lambda$7/4636255@e62e19&#10;Build info: version: &apos;2.53.0&apos;, revision: &apos;35ae25b1534ae328c771e0856c93e187490ca824&apos;, time: &apos;2016-03-15 10:43:46&apos;&#10;System info: host: &apos;Назар-ПК&apos;, ip: &apos;192.168.0.102&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;x86&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_66&apos;&#10;Driver info: org.openqa.selenium.firefox.FirefoxDriver&#10;Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=46.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]&#10;Session ID: d98ee20f-a0d7-432c-ba68-a316581f568d&#10;Build info: version: &apos;2.53.0&apos;, revision: &apos;35ae25b1534ae328c771e0856c93e187490ca824&apos;, time: &apos;2016-03-15 10:43:46&apos;&#10;System info: host: &apos;Назар-ПК&apos;, ip: &apos;192.168.0.102&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;x86&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_66&apos;&#10;Driver info: driver.version: unknown" type="org.openqa.selenium.TimeoutException">org.openqa.selenium.TimeoutException: 
+org.openqa.selenium.TimeoutException: Timed out after 15 seconds waiting for gdTicketsUaDesctop.utils.WaitFor$$Lambda$7/4636255@e62e19
+Build info: version: '2.53.0', revision: '35ae25b1534ae328c771e0856c93e187490ca824', time: '2016-03-15 10:43:46'
+System info: host: 'Назар-ПК', ip: '192.168.0.102', os.name: 'Windows 7', os.arch: 'x86', os.version: '6.1', java.version: '1.8.0_66'
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=46.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: d98ee20f-a0d7-432c-ba68-a316581f568d
+Build info: version: '2.53.0', revision: '35ae25b1534ae328c771e0856c93e187490ca824', time: '2016-03-15 10:43:46'
+System info: host: 'Назар-ПК', ip: '192.168.0.102', os.name: 'Windows 7', os.arch: 'x86', os.version: '6.1', java.version: '1.8.0_66'
+Driver info: driver.version: unknown
+	at gdTicketsUaDesctopTest.buyTicketTestSuite.BuyTicket_001_BuyRoundTicketTestCase.test_001(BuyTicket_001_BuyRoundTicketTestCase.java:34)
+Caused by: org.openqa.selenium.TimeoutException: 
+Timed out after 15 seconds waiting for gdTicketsUaDesctop.utils.WaitFor$$Lambda$7/4636255@e62e19
+Build info: version: '2.53.0', revision: '35ae25b1534ae328c771e0856c93e187490ca824', time: '2016-03-15 10:43:46'
+System info: host: 'Назар-ПК', ip: '192.168.0.102', os.name: 'Windows 7', os.arch: 'x86', os.version: '6.1', java.version: '1.8.0_66'
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=46.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: d98ee20f-a0d7-432c-ba68-a316581f568d
+	at gdTicketsUaDesctopTest.buyTicketTestSuite.BuyTicket_001_BuyRoundTicketTestCase.test_001(BuyTicket_001_BuyRoundTicketTestCase.java:34)
+Caused by: org.openqa.selenium.NoSuchElementException: 
+Unable to locate element: {"method":"xpath","selector":"//*[@id='from_name_as']"}
+Command duration or timeout: 65 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.53.0', revision: '35ae25b1534ae328c771e0856c93e187490ca824', time: '2016-03-15 10:43:46'
+System info: host: 'Назар-ПК', ip: '192.168.0.102', os.name: 'Windows 7', os.arch: 'x86', os.version: '6.1', java.version: '1.8.0_66'
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=46.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: d98ee20f-a0d7-432c-ba68-a316581f568d
+*** Element info: {Using=xpath, value=//*[@id='from_name_as']}
+	at gdTicketsUaDesctopTest.buyTicketTestSuite.BuyTicket_001_BuyRoundTicketTestCase.test_001(BuyTicket_001_BuyRoundTicketTestCase.java:34)
+Caused by: org.openqa.selenium.NoSuchElementException: 
+Unable to locate element: {"method":"xpath","selector":"//*[@id='from_name_as']"}
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.53.0', revision: '35ae25b1534ae328c771e0856c93e187490ca824', time: '2016-03-15 10:43:46'
+System info: host: 'Назар-ПК', ip: '192.168.0.102', os.name: 'Windows 7', os.arch: 'x86', os.version: '6.1', java.version: '1.8.0_66'
+Driver info: driver.version: unknown
 </failure>
-    <system-out>Configuring TestNG with: org.apache.maven.surefire.testng.conf.TestNG652Configurator@2decdb
-2016-11-06 12:40:36,999 INFO  [] ================================================================= 
-2016-11-06 12:40:36,999 INFO  [] Test suite started 
-2016-11-06 12:40:36,999 INFO  [] ================================================================= 
-2016-11-06 12:40:36,999 INFO  [] ================================================================= 
-2016-11-06 12:40:36,999 INFO  [] TestCase: &quot;BuyTicket_001_BuyRoundTicketTestCase&quot; started 
-2016-11-06 12:40:36,999 INFO  [] ================================================================= 
-2016-11-06 12:40:36,999 INFO  [] Used FirefoxDriver for Windows 
-2016-11-06 12:41:04,208 INFO  [] Used Firefox driver 
-2016-11-06 12:41:05,512 INFO  [] Move to coordinate 0x0 
-2016-11-06 12:41:05,512 INFO  [] Maximize window 
-2016-11-06 12:41:14,829 INFO  [] Go to: https://gd.tickets.ua/ 
-2016-11-06 12:41:16,856 INFO  [] Click on &quot;&apos;Р’ РѕР±Рµ СЃС‚РѕСЂРѕРЅС‹&apos;&quot; //*[@id=&apos;round_trip&apos;]/following-sibling::* 
-2016-11-06 12:41:16,856 INFO  [] ----------- Arrival point ----------- 
-2016-11-06 12:41:17,507 INFO  [] &quot;Киев &quot; has been send to &quot;РљСѓРґР°&quot; //*[@id=&apos;to_name&apos;] 
-2016-11-06 12:41:18,578 INFO  [] ENTER has been pressed 
-2016-11-06 12:41:19,137 INFO  [] Click on &quot;Р”Р°С‚Р° РљСѓРґР°&quot; //*[@id=&apos;departure_date_back&apos;] 
-2016-11-06 12:41:19,658 INFO  [] Click on &quot;24.10.2016&quot; //*[@data-year=&apos;2016&apos; and @data-month=&apos;10&apos;]/*[text()=&apos;24&apos;] 
-2016-11-06 12:41:19,658 INFO  [] --------- Departure point --------- 
-2016-11-06 12:41:20,118 INFO  [] &quot;Львов &quot; has been send to &quot;РћС‚РєСѓРґР°&quot; //*[@id=&apos;from_name_as&apos;] 
-2016-11-06 12:41:21,335 INFO  [] ENTER has been pressed 
-2016-11-06 12:41:21,595 INFO  [] Click on &quot;Р”Р°С‚Р° РћС‚РєСѓРґР°&quot; //*[@id=&apos;departure_date&apos;] 
-2016-11-06 12:41:21,753 INFO  [] Click on &quot;19.10.2016&quot; //*[@data-year=&apos;2016&apos; and @data-month=&apos;10&apos;]/*[text()=&apos;19&apos;] 
-2016-11-06 12:41:23,674 INFO  [] Click on &quot;РџРѕРёСЃРє&quot; //*[contains(@class,&apos;main-search__block&apos;)]//*[@type=&apos;submit&apos;] 
-2016-11-06 12:41:30,040 INFO  [] --------------- Train ------------- 
-2016-11-06 12:41:30,040 INFO  [] Р’С‹Р±СЂР°С‚СЊ: РџРѕРµР·Рґ 
-2016-11-06 12:41:30,057 INFO  [] 092Л  
-2016-11-06 12:41:30,363 INFO  [] Click on &quot;Р’С‹Р±СЂР°С‚СЊ: РўРёРї&quot; ((//*[contains(@class,&apos;free-places&apos;) and preceding-sibling::*[contains(@class,&apos;train&apos;)]])[10]//span/../a)[2] 
-2016-11-06 12:41:30,411 INFO  [] Купе 
-2016-11-06 12:41:33,773 INFO  [] Click on &quot;Р’С‹Р±СЂР°С‚СЊ: РњРµСЃС‚Рѕ&quot; (//*[contains(@class,&apos;sits_block&apos;)]//a)[8] 
-2016-11-06 12:41:34,648 INFO  [] 10 
-2016-11-06 12:41:35,198 INFO  [] &quot;Юзвишин &quot; has been send to &quot;Р¤Р°РјРёР»РёСЏ&quot; //*[contains(@id,&apos;lastname&apos;)] 
-2016-11-06 12:41:37,111 INFO  [] &quot;Назар &quot; has been send to &quot;Р?РјСЏ&quot; //*[contains(@id,&apos;firstname&apos;)] 
-2016-11-06 12:41:37,719 INFO  [] &quot;1478428836607@inbox.ru &quot; has been send to &quot;Email&quot; //*[@id=&apos;user_form&apos;]//*[@id=&apos;email&apos;] 
-2016-11-06 12:41:38,209 INFO  [] &quot;905147405 &quot; has been send to &quot;РќРѕРјРµСЂ С‚РµР»РµС„РѕРЅР°&quot; //*[@id=&apos;buyer_data&apos;]//*[@id=&apos;phone_number&apos;] 
-2016-11-06 12:41:38,379 INFO  [] Click on &quot;РЇ РїСЂРёРЅРёРјР°СЋ РїСЂР°РІРёР»Р° РїСѓР±Р»РёС‡РЅРѕР№ РѕС„РµСЂС‚С‹&quot; //*[@id=&apos;i_accept_offerta&apos;]/.. 
-2016-11-06 12:41:38,439 INFO  [] 317 UAH 
-2016-11-06 12:41:38,449 INFO  [] ----------------------------------- 
-2016-11-06 12:41:38,741 INFO  [] Click on &quot;РџСЂРѕРґРѕР»Р¶РёС‚СЊ&quot; //*[contains(@class,&apos;buy-block&apos;)]//*[@type=&apos;submit&apos;] 
-2016-11-06 12:41:43,034 INFO  [] --------------- Train ------------- 
-2016-11-06 12:41:43,034 INFO  [] Р’С‹Р±СЂР°С‚СЊ: РџРѕРµР·Рґ 
-2016-11-06 12:41:43,054 INFO  [] 115О  
-2016-11-06 12:41:43,404 INFO  [] Click on &quot;Р’С‹Р±СЂР°С‚СЊ: РўРёРї&quot; ((//*[contains(@class,&apos;free-places&apos;) and preceding-sibling::*[contains(@class,&apos;train&apos;)]])[2]//span/../a)[1] 
-2016-11-06 12:41:43,444 INFO  [] Люкс 
-2016-11-06 12:41:47,549 INFO  [] Click on &quot;Р’С‹Р±СЂР°С‚СЊ: РњРµСЃС‚Рѕ&quot; (//*[contains(@class,&apos;sits_block&apos;)]//a)[4] 
-2016-11-06 12:41:47,669 INFO  [] 4 
-2016-11-06 12:41:47,750 INFO  [] 710 UAH 
-2016-11-06 12:41:47,770 INFO  [] ----------------------------------- 
-2016-11-06 12:41:48,100 INFO  [] Click on &quot;РџСЂРѕРґРѕР»Р¶РёС‚СЊ&quot; //*[contains(@class,&apos;buy-block&apos;)]//*[@type=&apos;submit&apos;] 
-2016-11-06 12:41:54,497 INFO  [] Поезд №092Л &gt;-&lt; null 
-</system-out>
+    <system-out><![CDATA[13:26:20,426  ================================================================= 
+13:26:20,427  Test suite started 
+13:26:20,427  ================================================================= 
+13:26:20,496  ================================================================= 
+13:26:20,496  TestCase: "BuyTicket_001_BuyRoundTicketTestCase" started 
+13:26:20,497  ================================================================= 
+13:26:45,167  Used Firefox driver 
+13:26:46,694  Move to coordinate 0x0 
+13:26:46,694  Maximize window 
+13:27:00,299  Go to: https://gd.tickets.ua/ 
+13:27:00,759  --------- Departure point --------- 
+13:27:16,139  //*[@id='from_name_as'] isn't ENABLE 
+]]></system-out>
+    <system-err><![CDATA[SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+]]></system-err>
   </testcase>
 </testsuite>

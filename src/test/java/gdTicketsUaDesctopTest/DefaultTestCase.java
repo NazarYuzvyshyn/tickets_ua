@@ -5,8 +5,7 @@ import gdTicketsUaDesctop.utils.WebDriverFactory;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
-import static gdTicketsUaDesctop.utils.CommonServices.clearCookies;
-import static gdTicketsUaDesctop.utils.CommonServices.sleep;
+import static gdTicketsUaDesctop.utils.CommonServices.*;
 
 
 /**
@@ -38,7 +37,7 @@ public class DefaultTestCase {
         if (context.getFailedTests().size() > 0 || context.getSkippedTests().size() > 0) {
             Log.error("TestCase: \"" + testCaseName + "\" FAILED.");
         }
-//        sleep(600);
+        takeScreenshot(testCaseName, getUrl());
         clearCookies();
         WebDriverFactory.killDriver();
         Log.info("Browser has been closed");

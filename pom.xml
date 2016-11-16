@@ -23,10 +23,6 @@
                             <name>usedefaultlisteners</name>
                             <value>false</value>
                         </property>
-                        <property>
-                            <name>listener</name>
-                            <value>helpers.TestListener</value>
-                        </property>
                     </properties>
                 </configuration>
                 <dependencies>

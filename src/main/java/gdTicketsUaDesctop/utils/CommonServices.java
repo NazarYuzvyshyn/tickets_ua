@@ -1,15 +1,18 @@
 package gdTicketsUaDesctop.utils;
 
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
+import ru.yandex.qatools.allure.annotations.Attachment;
 
-import java.io.UnsupportedEncodingException;
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-import static gdTicketsUaDesctop.utils.WebDriverFactory.getDriver;
-import static org.testng.Assert.assertTrue;
 import static gdTicketsUaDesctop.utils.Log.info;
+import static gdTicketsUaDesctop.utils.WebDriverFactory.getDriver;
 
 /**
  * @author Назар on 14.09.2016.
@@ -69,5 +72,31 @@ public class CommonServices {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    @Attachment("{0} {1}")
+    public static void takeScreenshot(String testCaseName, String message) {
+
+        try {
+            String screenshotName = testCaseName + "ScreenShot.png";
+            final BufferedImage image;
+            File scrFile = ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.FILE);
+            image= ImageIO.read(scrFile);
+            Graphics g = image.getGraphics();
+            g.setFont(new Font("Arial Black", Font.PLAIN, 20));
+            g.setColor(Color.DARK_GRAY);
+            g.drawString("URL: " + message, 50, 100);
+            g.dispose();
+
+            ImageIO.write(image, "png", new File("target/screenshots/" + screenshotName));
+
+            Log.info("");
+            Log.warn("Screenshot captured.");
+            Log.warn("Screenshot name: \"" + screenshotName + "\".");
+        }
+        catch (WebDriverException | IOException e){
+            Log.error("Catch "+e);
+        }
+
     }
 }

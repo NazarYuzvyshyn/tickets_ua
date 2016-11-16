@@ -1,23 +1,42 @@
 -------------------------------------------------------------------------------
 Test set: TestSuite
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 83.394 sec <<< FAILURE!
-test_001(gdTicketsUaDesctopTest.buyTicketTestSuite.BuyTicket_001_BuyRoundTicketTestCase)  Time elapsed: 48.989 sec  <<< FAILURE!
-java.lang.NullPointerException
-	at java.lang.String.contains(String.java:2133)
-	at gdTicketsUaDesctop.pages.PurchasePage.lambda$confirmTrain$7(PurchasePage.java:57)
-	at java.util.stream.MatchOps$1MatchSink.accept(MatchOps.java:90)
-	at java.util.stream.ReferencePipeline$11$1.accept(ReferencePipeline.java:373)
-	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
-	at java.util.ArrayList$ArrayListSpliterator.tryAdvance(ArrayList.java:1351)
-	at java.util.stream.ReferencePipeline.forEachWithCancel(ReferencePipeline.java:126)
-	at java.util.stream.AbstractPipeline.copyIntoWithCancel(AbstractPipeline.java:498)
-	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:485)
-	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
-	at java.util.stream.MatchOps$MatchOp.evaluateSequential(MatchOps.java:230)
-	at java.util.stream.MatchOps$MatchOp.evaluateSequential(MatchOps.java:196)
-	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
-	at java.util.stream.ReferencePipeline.anyMatch(ReferencePipeline.java:449)
-	at gdTicketsUaDesctop.pages.PurchasePage.confirmTrain(PurchasePage.java:57)
-	at gdTicketsUaDesctopTest.buyTicketTestSuite.BuyTicket_001_BuyRoundTicketTestCase.test_001(BuyTicket_001_BuyRoundTicketTestCase.java:46)
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 62.696 sec <<< FAILURE! - in TestSuite
+test_001(gdTicketsUaDesctopTest.buyTicketTestSuite.BuyTicket_001_BuyRoundTicketTestCase)  Time elapsed: 29.36 sec  <<< FAILURE!
+org.openqa.selenium.TimeoutException: 
+org.openqa.selenium.TimeoutException: Timed out after 15 seconds waiting for gdTicketsUaDesctop.utils.WaitFor$$Lambda$7/4636255@e62e19
+Build info: version: '2.53.0', revision: '35ae25b1534ae328c771e0856c93e187490ca824', time: '2016-03-15 10:43:46'
+System info: host: 'Назар-ПК', ip: '192.168.0.102', os.name: 'Windows 7', os.arch: 'x86', os.version: '6.1', java.version: '1.8.0_66'
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=46.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: d98ee20f-a0d7-432c-ba68-a316581f568d
+Build info: version: '2.53.0', revision: '35ae25b1534ae328c771e0856c93e187490ca824', time: '2016-03-15 10:43:46'
+System info: host: 'Назар-ПК', ip: '192.168.0.102', os.name: 'Windows 7', os.arch: 'x86', os.version: '6.1', java.version: '1.8.0_66'
+Driver info: driver.version: unknown
+	at gdTicketsUaDesctopTest.buyTicketTestSuite.BuyTicket_001_BuyRoundTicketTestCase.test_001(BuyTicket_001_BuyRoundTicketTestCase.java:34)
+Caused by: org.openqa.selenium.TimeoutException: 
+Timed out after 15 seconds waiting for gdTicketsUaDesctop.utils.WaitFor$$Lambda$7/4636255@e62e19
+Build info: version: '2.53.0', revision: '35ae25b1534ae328c771e0856c93e187490ca824', time: '2016-03-15 10:43:46'
+System info: host: 'Назар-ПК', ip: '192.168.0.102', os.name: 'Windows 7', os.arch: 'x86', os.version: '6.1', java.version: '1.8.0_66'
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=46.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: d98ee20f-a0d7-432c-ba68-a316581f568d
+	at gdTicketsUaDesctopTest.buyTicketTestSuite.BuyTicket_001_BuyRoundTicketTestCase.test_001(BuyTicket_001_BuyRoundTicketTestCase.java:34)
+Caused by: org.openqa.selenium.NoSuchElementException: 
+Unable to locate element: {"method":"xpath","selector":"//*[@id='from_name_as']"}
+Command duration or timeout: 65 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.53.0', revision: '35ae25b1534ae328c771e0856c93e187490ca824', time: '2016-03-15 10:43:46'
+System info: host: 'Назар-ПК', ip: '192.168.0.102', os.name: 'Windows 7', os.arch: 'x86', os.version: '6.1', java.version: '1.8.0_66'
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=46.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: d98ee20f-a0d7-432c-ba68-a316581f568d
+*** Element info: {Using=xpath, value=//*[@id='from_name_as']}
+	at gdTicketsUaDesctopTest.buyTicketTestSuite.BuyTicket_001_BuyRoundTicketTestCase.test_001(BuyTicket_001_BuyRoundTicketTestCase.java:34)
+Caused by: org.openqa.selenium.NoSuchElementException: 
+Unable to locate element: {"method":"xpath","selector":"//*[@id='from_name_as']"}
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.53.0', revision: '35ae25b1534ae328c771e0856c93e187490ca824', time: '2016-03-15 10:43:46'
+System info: host: 'Назар-ПК', ip: '192.168.0.102', os.name: 'Windows 7', os.arch: 'x86', os.version: '6.1', java.version: '1.8.0_66'
+Driver info: driver.version: unknown
 

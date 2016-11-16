@@ -3,7 +3,6 @@ gdTicketsUaDesctop\pages\PurchasePage$1.class
 gdTicketsUaDesctop\pages\ResultPage.class
 gdTicketsUaDesctop\pages\PurchasePage$PayBy$2.class
 gdTicketsUaDesctop\utils\WebDriverFactory.class
-gdTicketsUaDesctop\pages\MainTest.class
 gdTicketsUaDesctop\utils\PropertyReader.class
 gdTicketsUaDesctop\utils\WebElementServices.class
 gdTicketsUaDesctop\businessObjects\Ticket.class
