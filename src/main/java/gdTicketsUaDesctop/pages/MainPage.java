@@ -2,6 +2,7 @@ package gdTicketsUaDesctop.pages;
 
 import gdTicketsUaDesctop.businessObjects.Ticket;
 import org.openqa.selenium.WebDriver;
+import ru.yandex.qatools.allure.annotations.Step;
 
 import java.time.LocalDate;
 
@@ -35,6 +36,7 @@ public class MainPage {
         this.ticket = ticket;
     }
 
+    @Step("Get Ticket")
     public void getTicket() {
         info("--------- Departure point ---------");
         sendKeysWithEnter("Откуда", ticket.getForwardCity(), from);
@@ -43,6 +45,7 @@ public class MainPage {
         setDate(ticket.getForwardDate(), forwardDate);
     }
 
+    @Step("Get round Trip")
     public void getRoundTrip() {
         clickOn("'В обе стороны'", round);
         setDate(ticket.getBackwardDate(), backwardDate);

@@ -3,6 +3,7 @@ package gdTicketsUaDesctop.pages;
 import gdTicketsUaDesctop.utils.WaitFor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import ru.yandex.qatools.allure.annotations.Step;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -46,6 +47,7 @@ public class PurchasePage {
         this.driver = driver;
     }
 
+    @Step("Choose Pay method")
     public void payBy(PayBy type) {
         clickOn(type.getString(), "//*[text()='" + type.getString() + "']/..");
     }
