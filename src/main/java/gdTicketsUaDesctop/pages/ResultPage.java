@@ -60,7 +60,6 @@ public class ResultPage {
      * and if trip is round write to Ticket object each one train name
      * @return index of this train in result list
      */
-    @Step("Get random Train")
     public int getRandomTrain() {
         waitCondition(trains, LIST_NOT_EMPTY, 10);
         List<WebElement> listOfTrains = getElements(trains);
@@ -78,7 +77,6 @@ public class ResultPage {
      * Can contains "Люкс","Купе","Плацкарт","Сидячий" (one of them or several)
      * @param index index of train in result list
      */
-    @Step("Get random Place type")
     public void getRandomPlaceType(int index) {
         String block = "(" + trainCategories + ")[" + (index + 1) + "]";
         waitCondition(trainCategories, LIST_NOT_EMPTY, 10);
@@ -89,12 +87,12 @@ public class ResultPage {
         clickOn("Тип: " + text, chooseType);
         if (counter == 0)ticket.placeType = text;
         else ticket.placeTypeRound = text;
+        throw new RuntimeException();
     }
 
     /**
      * Gets available free place in chosen train and place category.
      */
-    @Step("Get random Place")
     public void getRandomPlace() {
         waitCondition(freePlaces, LIST_NOT_EMPTY, 10);
         List<WebElement> places = getElements(freePlaces);

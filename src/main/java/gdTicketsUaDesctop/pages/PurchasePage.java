@@ -47,7 +47,6 @@ public class PurchasePage {
         this.driver = driver;
     }
 
-    @Step("Choose Pay method")
     public void payBy(PayBy type) {
         clickOn(type.getString(), "//*[text()='" + type.getString() + "']/..");
     }

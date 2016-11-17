@@ -3,7 +3,7 @@
 
 <suite name="Buy gd-ticket suite" >
 
-    <parameter name="browser" value="ff"/>
+    <parameter name="browser" value="chrome"/>
 
     <test name="BuyTicket_001_BuyRoundTicketTestCase">
         <classes>

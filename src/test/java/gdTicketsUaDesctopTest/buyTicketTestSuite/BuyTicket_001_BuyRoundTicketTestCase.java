@@ -7,6 +7,8 @@ import gdTicketsUaDesctop.pages.PurchasePage;
 import gdTicketsUaDesctop.pages.ResultPage;
 import gdTicketsUaDesctopTest.DefaultTestCase;
 import org.testng.annotations.Test;
+import ru.yandex.qatools.allure.annotations.Title;
+
 import static gdTicketsUaDesctop.Constants.BASE_URL;
 import static gdTicketsUaDesctop.Constants.LIQPAY;
 import static gdTicketsUaDesctop.pages.PurchasePage.PayBy.PRIVAT_24;
@@ -27,7 +29,7 @@ public class BuyTicket_001_BuyRoundTicketTestCase extends DefaultTestCase {
     private PurchasePage purchasePage = new PurchasePage(getDriver());
 
     @Test
-    public void test_001() {
+    public void BuyTicket_001_BuyRoundTicket() {
 
         goTo(BASE_URL);
 

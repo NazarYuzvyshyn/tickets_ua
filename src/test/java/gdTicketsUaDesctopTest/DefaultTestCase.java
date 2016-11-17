@@ -1,56 +1,36 @@
 package gdTicketsUaDesctopTest;
 
 import gdTicketsUaDesctop.utils.Log;
-import gdTicketsUaDesctop.utils.WebDriverFactory;
-import org.testng.ITestContext;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
-import static gdTicketsUaDesctop.utils.CommonServices.*;
-
+import static gdTicketsUaDesctop.utils.CommonServices.clearCookies;
+import static gdTicketsUaDesctop.utils.CommonServices.getTestClassName;
+import static gdTicketsUaDesctop.utils.WebDriverFactory.killDriver;
+import static gdTicketsUaDesctop.utils.WebDriverFactory.setWebDriver;
 
 /**
  * @author Назар on 04.11.2016.
  */
 public class DefaultTestCase {
 
-    public String testCaseName = this.getClass().toString().substring(this.getClass().toString().lastIndexOf(".") + 1);
-
-    @BeforeSuite
-    public void startTestSuite() {
-        Log.info("=================================================================");
-        Log.info("Test suite started");
-        Log.info("=================================================================");
-    }
+    private String testCaseName = getTestClassName(this.getClass().toString());
 
     @Parameters("browser")
     @BeforeTest
     public void startTest(@Optional("ff") String browser) {
-
-        Log.info("=================================================================");
-        Log.info("TestCase: \"" + testCaseName + "\" started");
-        Log.info("=================================================================");
-        WebDriverFactory.setWebDriver(browser);
+        Log.info("========= * TestCase: \"" + testCaseName + "\" is started * =========");
+        setWebDriver(browser);
     }
 
     @AfterTest
-    public void afterTest(ITestContext context) {
-        if (context.getFailedTests().size() > 0 || context.getSkippedTests().size() > 0) {
-            takeScreenshot(testCaseName, getUrl());
-            Log.error("TestCase: \"" + testCaseName + "\" FAILED.");
-        }
+    public void afterTest() {
         clearCookies();
-        WebDriverFactory.killDriver();
+        killDriver();
         Log.info("Browser has been closed");
-        Log.info("=================================================================");
-        Log.info("TestCase: \"" + testCaseName + "\" finished.");
-        Log.info("=================================================================");
-    }
-
-    @AfterSuite
-    public void finishTestSuite() {
-        Log.info("=================================================================");
-        Log.info("Test suite finished.");
-        Log.info("=================================================================");
+        Log.info("========= * TestCase: \"" + testCaseName + "\" is finished * =========");
     }
 
 }

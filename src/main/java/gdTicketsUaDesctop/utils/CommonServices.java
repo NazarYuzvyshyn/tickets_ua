@@ -4,13 +4,17 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import ru.yandex.qatools.allure.annotations.Attachment;
+import ru.yandex.qatools.allure.annotations.Step;
+import ru.yandex.qatools.allure.annotations.Title;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
+import static gdTicketsUaDesctop.utils.Log.error;
 import static gdTicketsUaDesctop.utils.Log.info;
 import static gdTicketsUaDesctop.utils.WebDriverFactory.getDriver;
 
@@ -19,17 +23,17 @@ import static gdTicketsUaDesctop.utils.WebDriverFactory.getDriver;
  */
 public class CommonServices {
 
-    public static void assertThat(Boolean condition, String errorMessage ) {
-        if (!condition){
-            Log.error("ACTUAL RESULT: " + errorMessage);
+    public static void assertThat(Boolean condition, String errorMessage) {
+        if (!condition) {
+            error("ACTUAL RESULT: " + errorMessage);
         }
         Assert.assertTrue(condition);
     }
 
-    public static void pressKey(Keys keys){
+    public static void pressKey(Keys keys) {
         Actions actions = new Actions(getDriver());
         actions.sendKeys(keys).perform();
-        Log.info( "press " + keys.name());
+        Log.info("press " + keys.name());
     }
 
     public static void moveToCoordinate(int x, int y, WebDriver driver) {
@@ -57,16 +61,16 @@ public class CommonServices {
         driver.navigate().back();
     }
 
-    public static void clearCookies(){
+    public static void clearCookies() {
         getDriver().manage().deleteAllCookies();
         info("All cookies have been delete");
     }
 
-    public static String getUrl(){
+    public static String getUrl() {
         return getDriver().getCurrentUrl();
     }
 
-    public static void sleep(long sec){
+    public static void sleep(long sec) {
         try {
             Thread.sleep(sec * 1000);
         } catch (InterruptedException e) {
@@ -74,29 +78,33 @@ public class CommonServices {
         }
     }
 
-    @Attachment(value = "{0} failed test screenshot", type = "image/png")
-    public static void takeScreenshot(String testCaseName, String message) {
-
+    @Attachment(value = "{0} << FAILED TEST SCREENSHOT >>", type = "image/png")
+    public static byte[] takeScreenshot(String testCaseName, String message) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        byte[] imagePng = null;
         try {
-            String screenshotName = testCaseName + "ScreenShot.png";
+            String screenshotName = testCaseName + ".png";
             final BufferedImage image;
-            File scrFile = ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.FILE);
-            image= ImageIO.read(scrFile);
+            File scrFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+            image = ImageIO.read(scrFile);
             Graphics g = image.getGraphics();
-            g.setFont(new Font("Arial Black", Font.PLAIN, 20));
-            g.setColor(Color.DARK_GRAY);
+            g.setFont(new Font("Courier New", Font.PLAIN, 30));
+            g.setColor(Color.RED);
             g.drawString("URL: " + message, 50, 100);
             g.dispose();
 
-            ImageIO.write(image, "png", new File("tickets_ua/target/screenshots/" + screenshotName));
+            ImageIO.write(image, "png", baos);
+            imagePng = baos.toByteArray();
+            Log.warn("Screenshot was captured and named: \"" + screenshotName + "\".");
 
-            Log.info("");
-            Log.warn("Screenshot captured.");
-            Log.warn("Screenshot name: \"" + screenshotName + "\".");
+        } catch (WebDriverException | IOException e) {
+            error("Catch " + e);
         }
-        catch (WebDriverException | IOException e){
-            Log.error("Catch "+e);
-        }
-
+        return imagePng;
     }
+
+    public static String getTestClassName(String className){
+        return className.substring(className.lastIndexOf(".") + 1, className.length() - 8);
+    }
+
 }
