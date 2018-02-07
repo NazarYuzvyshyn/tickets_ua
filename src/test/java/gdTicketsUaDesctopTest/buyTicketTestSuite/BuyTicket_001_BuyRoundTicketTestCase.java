@@ -24,9 +24,9 @@ import static org.testng.Assert.assertTrue;
 public class BuyTicket_001_BuyRoundTicketTestCase extends DefaultTestCase {
 
     private Ticket ticket = new Ticket("buyRound.properties", "random");
-    private MainPage mainPage = new MainPage(ticket, getDriver());
-    private ResultPage resultPage = new ResultPage(new Passenger("adult.properties"),ticket, getDriver());
-    private PurchasePage purchasePage = new PurchasePage(getDriver());
+    private MainPage mainPage = new MainPage(ticket);
+    private ResultPage resultPage = new ResultPage(new Passenger("adult.properties"),ticket);
+    private PurchasePage purchasePage = new PurchasePage();
 
     @Test
     public void BuyTicket_001_BuyRoundTicket() {
