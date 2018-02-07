@@ -2,13 +2,13 @@ package gdTicketsUaDesctop.utils;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
 import java.util.List;
-
 import static gdTicketsUaDesctop.utils.CommonServices.pressKey;
 import static gdTicketsUaDesctop.utils.CommonServices.sleep;
 import static gdTicketsUaDesctop.utils.Log.info;
 import static gdTicketsUaDesctop.utils.WaitFor.*;
+import static gdTicketsUaDesctop.utils.WaitFor.WaitCondition.CLICKABLE;
+import static gdTicketsUaDesctop.utils.WaitFor.WaitCondition.ENABLE;
 import static gdTicketsUaDesctop.utils.WebDriverFactory.getDriver;
 import static org.openqa.selenium.Keys.ENTER;
 

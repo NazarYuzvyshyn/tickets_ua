@@ -9,24 +9,26 @@ import static gdTicketsUaDesctop.utils.CommonServices.moveToCoordinate;
 import static org.testng.Assert.assertTrue;
 
 /**
- * @author  Назар on 14.09.2016.
+ * @author Назар on 14.09.2016.
  */
 public class WebDriverFactory {
 
     public static final ThreadLocal<WebDriver> DRIVER = new ThreadLocal<>();
 
-    private WebDriverFactory(){}
+    private WebDriverFactory() {
+    }
 
     public static WebDriver getDriver() {
         return DRIVER.get();
     }
 
-    public static void killDriver(){
+    public static void killDriver() {
         getDriver().quit();
         DRIVER.remove();
     }
 
     public static void setWebDriver(String browser) {
+        if (getDriver() != null) {
             switch (browser) {
                 case "ff":
                     DRIVER.set(new FirefoxDriver());
@@ -37,10 +39,11 @@ public class WebDriverFactory {
                     DRIVER.set(new ChromeDriver());
                     break;
             }
-            getDriver().manage().window().maximize();
-            moveToCoordinate(0, 0, getDriver());
-            Log.info("Maximize window");
         }
+        getDriver().manage().window().maximize();
+        moveToCoordinate(0, 0, getDriver());
+        Log.info("Maximized window");
+    }
 
     private static void setChromeDriver(String osName) {
         String path = "";
@@ -57,7 +60,7 @@ public class WebDriverFactory {
         System.setProperty("webdriver.chrome.driver", path);
     }
 
-    private static String osVersion(){
+    private static String osVersion() {
         return System.getProperty("os.name").toLowerCase();
     }
 

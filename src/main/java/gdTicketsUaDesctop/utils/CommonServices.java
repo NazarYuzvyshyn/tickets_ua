@@ -1,19 +1,14 @@
 package gdTicketsUaDesctop.utils;
-
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import ru.yandex.qatools.allure.annotations.Attachment;
-import ru.yandex.qatools.allure.annotations.Step;
-import ru.yandex.qatools.allure.annotations.Title;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-
 import static gdTicketsUaDesctop.utils.Log.error;
 import static gdTicketsUaDesctop.utils.Log.info;
 import static gdTicketsUaDesctop.utils.WebDriverFactory.getDriver;
@@ -88,7 +83,7 @@ public class CommonServices {
             File scrFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
             image = ImageIO.read(scrFile);
             Graphics g = image.getGraphics();
-            g.setFont(new Font("Courier New", Font.PLAIN, 30));
+            g.setFont(new Font("Verdana", Font.BOLD, 15));
             g.setColor(Color.RED);
             g.drawString("URL: " + message, 50, 100);
             g.dispose();

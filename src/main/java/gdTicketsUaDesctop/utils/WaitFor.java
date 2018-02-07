@@ -11,21 +11,23 @@ import static gdTicketsUaDesctop.utils.WebElementServices.*;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 import static org.testng.Assert.assertTrue;
 
-public enum WaitFor {
+public class WaitFor {
 
-    CLICKABLE,
-    ENABLE,
-    ELEMENT_ON_FOCUS,
-    VISIBIL,
-    PSESENCE,
-    LIST_NOT_EMPTY;
+    public enum WaitCondition{
+        CLICKABLE,
+        ENABLE,
+        ELEMENT_ON_FOCUS,
+        VISIBIL,
+        PSESENCE,
+        LIST_NOT_EMPTY
+    }
 
-    public static void waitCondition(String locator, WaitFor waitFor, long timeout) {
+    public static void waitCondition(String locator, WaitCondition waitFor, long timeout) {
         WebDriverWait wait = new WebDriverWait(getDriver(), timeout);
         try {
             switch (waitFor) {
                 case CLICKABLE:
-                    elementToBeClickable(By.xpath(locator));
+                    wait.until((WebDriver webDriver) -> elementToBeClickable(By.xpath(locator)));
                     break;
                 case LIST_NOT_EMPTY:
                     wait.until((WebDriver webDriver) -> !getElements(locator).isEmpty());
@@ -34,10 +36,10 @@ public enum WaitFor {
                     wait.until((WebDriver webDriver) -> getElement(locator).isEnabled());
                     break;
                 case PSESENCE:
-                    presenceOfElementLocated(By.xpath(locator));
+                    wait.until((WebDriver webDriver) -> presenceOfElementLocated(By.xpath(locator)));
                     break;
                 case VISIBIL:
-                    visibilityOfElementLocated(By.xpath(locator));
+                    wait.until((WebDriver webDriver) -> visibilityOfElementLocated(By.xpath(locator)));
                     break;
                 case ELEMENT_ON_FOCUS:
                     clickOn("Make focus on element", locator);

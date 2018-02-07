@@ -1,13 +1,8 @@
 package gdTicketsUaDesctop.pages;
-
-import gdTicketsUaDesctop.utils.WaitFor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import ru.yandex.qatools.allure.annotations.Step;
-
 import java.time.LocalDate;
 import java.util.List;
-
 import static gdTicketsUaDesctop.utils.Log.info;
 import static gdTicketsUaDesctop.utils.WaitFor.waitForUrl;
 import static gdTicketsUaDesctop.utils.WebElementServices.*;
@@ -41,11 +36,6 @@ public class PurchasePage {
     private String nameAndPlaceType = "//*[contains(@class,'segment')]//*[child::*[@data-label]]";
     private String submit = "//*[contains(@class,'booking_price_button')]//*[@type='submit']";
 
-    private WebDriver driver;
-
-    public PurchasePage(WebDriver driver) {
-        this.driver = driver;
-    }
 
     public void payBy(PayBy type) {
         clickOn(type.getString(), "//*[text()='" + type.getString() + "']/..");

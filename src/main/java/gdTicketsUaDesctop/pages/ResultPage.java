@@ -5,17 +5,14 @@ import gdTicketsUaDesctop.businessObjects.Ticket;
 import gdTicketsUaDesctop.utils.Log;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import ru.yandex.qatools.allure.annotations.Step;
-
 import java.util.List;
 import java.util.Random;
-
-import static gdTicketsUaDesctop.utils.CommonServices.sleep;
 import static gdTicketsUaDesctop.utils.Log.info;
 import static gdTicketsUaDesctop.utils.WaitFor.*;
+import static gdTicketsUaDesctop.utils.WaitFor.WaitCondition.LIST_NOT_EMPTY;
+import static gdTicketsUaDesctop.utils.WaitFor.WaitCondition.ENABLE;
 import static gdTicketsUaDesctop.utils.WebDriverFactory.getDriver;
 import static gdTicketsUaDesctop.utils.WebElementServices.*;
-import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 
 /**
  * @author Nazar on 03.11.2016.
@@ -43,14 +40,12 @@ public class ResultPage {
     private String email = "//*[@id='user_form']//*[@id='email']";
     private String lastFirstNames = "//*[@id='user_form']//*[@id='name']";
 
-    private WebDriver driver;
     private Passenger passenger;
     private Ticket ticket;
     private int counter = 0;
     private Random random = new Random();
 
-    public ResultPage(Passenger passenger, Ticket ticket, WebDriver driver) {
-        this.driver = driver;
+    public ResultPage(Passenger passenger, Ticket ticket) {
         this.passenger = passenger;
         this.ticket = ticket;
     }
