@@ -1,5 +1,7 @@
 package gdTicketsUaDesctop.pages;
 import gdTicketsUaDesctop.businessObjects.Ticket;
+import org.openqa.selenium.By;
+
 import java.time.LocalDate;
 import static gdTicketsUaDesctop.utils.Log.info;
 import static gdTicketsUaDesctop.utils.WaitFor.*;

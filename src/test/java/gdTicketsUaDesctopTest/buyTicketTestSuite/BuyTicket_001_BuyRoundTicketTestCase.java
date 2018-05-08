@@ -23,58 +23,58 @@ import static org.testng.Assert.assertTrue;
  */
 public class BuyTicket_001_BuyRoundTicketTestCase extends DefaultTestCase {
 
-    private Ticket ticket = new Ticket("buyRound.properties", "random");
-    private MainPage mainPage = new MainPage(ticket);
-    private ResultPage resultPage = new ResultPage(new Passenger("adult.properties"),ticket);
-    private PurchasePage purchasePage = new PurchasePage();
-
-    @Test
-    public void BuyTicket_001_BuyRoundTicket() {
-
-        goTo(BASE_URL);
-
-        mainPage.getTicket();
-        mainPage.getRoundTrip();
-        mainPage.search();
-
-        resultPage.getRandomPlaceType(resultPage.getRandomTrain());
-        resultPage.getRandomPlace();
-        resultPage.fillPassengerForm();
-        resultPage.fillContacts();
-        resultPage.acceptOfferta();
-        resultPage.submit();
-
-//=========== Choosing a backward ticket =============//
-
-        resultPage.getRandomPlaceType(resultPage.getRandomTrain());
-        resultPage.getRandomPlace();
-        resultPage.submit();
-
-//=========== Checking of ticket correctness =========//
-
-        assertTrue(purchasePage.confirmTrain(ticket.trainNumber));
-        assertTrue(purchasePage.confirmTrain(ticket.trainNumberRound));
-
-        assertTrue(purchasePage.confirmDateAndCity(
-                ticket.getForwardDate(),ticket.getForwardCity()));
-        assertTrue(purchasePage.confirmDateAndCity(
-                ticket.getBackwardDate(),ticket.getBackwardCity()));
-
-        assertTrue(purchasePage.confirmNameAndPlaceType(
-                ticket.lastFirstNames,ticket.placeType));
-        assertTrue(purchasePage.confirmNameAndPlaceType(
-                ticket.lastFirstNames,ticket.placeTypeRound));
-
-        assertTrue(purchasePage.confirmPrice(ticket.price,ticket.priceRound));
-
-//========== Confirm paying =============//
-
-        purchasePage.payBy(PRIVAT_24);
-        purchasePage.submit();
-
-        assertThat(getUrl().contains(LIQPAY),
-                "Redirect to payment page hasn't been fulfilled");
-
-    }
+//    private Ticket ticket = new Ticket("buyRound.properties", "random");
+//    private MainPage mainPage = new MainPage(ticket);
+//    private ResultPage resultPage = new ResultPage(new Passenger("adult.properties"),ticket);
+//    private PurchasePage purchasePage = new PurchasePage();
+//
+//    @Test
+//    public void BuyTicket_001_BuyRoundTicket() {
+//
+//        goTo(BASE_URL);
+//
+//        mainPage.getTicket();
+//        mainPage.getRoundTrip();
+//        mainPage.search();
+//
+//        resultPage.getRandomPlaceType(resultPage.getRandomTrain());
+//        resultPage.getRandomPlace();
+//        resultPage.fillPassengerForm();
+//        resultPage.fillContacts();
+//        resultPage.acceptOfferta();
+//        resultPage.submit();
+//
+////=========== Choosing a backward ticket =============//
+//
+//        resultPage.getRandomPlaceType(resultPage.getRandomTrain());
+//        resultPage.getRandomPlace();
+//        resultPage.submit();
+//
+////=========== Checking of ticket correctness =========//
+//
+//        assertTrue(purchasePage.confirmTrain(ticket.trainNumber));
+//        assertTrue(purchasePage.confirmTrain(ticket.trainNumberRound));
+//
+//        assertTrue(purchasePage.confirmDateAndCity(
+//                ticket.getForwardDate(),ticket.getForwardCity()));
+//        assertTrue(purchasePage.confirmDateAndCity(
+//                ticket.getBackwardDate(),ticket.getBackwardCity()));
+//
+//        assertTrue(purchasePage.confirmNameAndPlaceType(
+//                ticket.lastFirstNames,ticket.placeType));
+//        assertTrue(purchasePage.confirmNameAndPlaceType(
+//                ticket.lastFirstNames,ticket.placeTypeRound));
+//
+//        assertTrue(purchasePage.confirmPrice(ticket.price,ticket.priceRound));
+//
+////========== Confirm paying =============//
+//
+//        purchasePage.payBy(PRIVAT_24);
+//        purchasePage.submit();
+//
+//        assertThat(getUrl().contains(LIQPAY),
+//                "Redirect to payment page hasn't been fulfilled");
+//
+//    }
 
 }
