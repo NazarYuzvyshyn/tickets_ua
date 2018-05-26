@@ -1,4 +1,5 @@
 package gdTicketsUaDesctop.pages;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import java.time.LocalDate;
@@ -30,15 +31,15 @@ public class PurchasePage {
         abstract String getString();
     }
 
-    private String price = "//*[@data-payment-data='tarif']";
-    private String train = "//*[contains(@class,'one_offer-booking')]//strong";
-    private String dateAndCity = "//*[contains(@class,'one_offer-booking')]//*[contains(@class,'departure-time')]";
-    private String nameAndPlaceType = "//*[contains(@class,'segment')]//*[child::*[@data-label]]";
-    private String submit = "//*[contains(@class,'booking_price_button')]//*[@type='submit']";
+    private By price = By.xpath("//*[@data-payment-data='tarif']");
+    private By train = By.xpath("//*[contains(@class,'one_offer-booking')]//strong");
+    private By dateAndCity = By.xpath("//*[contains(@class,'one_offer-booking')]//*[contains(@class,'departure-time')]");
+    private By nameAndPlaceType = By.xpath("//*[contains(@class,'segment')]//*[child::*[@data-label]]");
+    private By submit = By.xpath("//*[contains(@class,'booking_price_button')]//*[@type='submit']");
 
 
     public void payBy(PayBy type) {
-        clickOn(type.getString(), "//*[text()='" + type.getString() + "']/..");
+        clickOn(type.getString(), By.xpath("//*[text()='" + type.getString() + "']/.."));
     }
 
     public boolean confirmTrain(String train) {

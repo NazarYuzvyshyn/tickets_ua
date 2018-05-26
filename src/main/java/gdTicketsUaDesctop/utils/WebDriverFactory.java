@@ -1,19 +1,21 @@
 package gdTicketsUaDesctop.utils;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-
-import static gdTicketsUaDesctop.Constants.DRIVER_LOCATION;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import static gdTicketsUaDesctop.utils.TestFailure.failTest;
+import static gdTicketsUaDesctop.utils.Log.info;
+import java.net.MalformedURLException;
+import java.net.URI;
 import static gdTicketsUaDesctop.utils.CommonServices.moveToCoordinate;
-import static org.testng.Assert.assertTrue;
+import java.time.LocalDateTime;
 
 /**
  * @author Назар on 14.09.2016.
  */
 public class WebDriverFactory {
 
-    public static final ThreadLocal<WebDriver> DRIVER = new ThreadLocal<>();
+    private static final ThreadLocal<WebDriver> DRIVER = new ThreadLocal<>();
 
     private WebDriverFactory() {
     }
@@ -28,36 +30,22 @@ public class WebDriverFactory {
     }
 
     public static void setWebDriver(String browser) {
-        if (getDriver() != null) {
-            switch (browser) {
-                case "ff":
-                    DRIVER.set(new FirefoxDriver());
-                    Log.info("Used Firefox driver");
-                    break;
-                case "chrome":
-                    WebDriverFactory.setChromeDriver(osVersion());
-                    DRIVER.set(new ChromeDriver());
-                    break;
-            }
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setBrowserName(browser);
+        capabilities.setCapability("enableVNC", true);
+        capabilities.setCapability("enableVideo", true);
+        capabilities.setCapability("videoName", LocalDateTime.now().toString());
+
+        try {
+            DRIVER.set(new RemoteWebDriver(URI.create("http://localhost:4444/wd/hub").toURL(),
+                    capabilities
+            ));
+        } catch (MalformedURLException e) {
+            failTest(e.getMessage());
         }
         getDriver().manage().window().maximize();
         moveToCoordinate(0, 0, getDriver());
         Log.info("Maximized window");
-    }
-
-    private static void setChromeDriver(String osName) {
-        String path = "";
-        if (osName.startsWith("win")) {
-            path = DRIVER_LOCATION + "chrome/chrome-win/chromedriver.exe";
-            Log.info("Used ChromeDriver for Windows");
-        } else if (osName.startsWith("lin")) {
-            path = DRIVER_LOCATION + "chrome/chrome-lin/chromedriver";
-            Log.info("Used ChromeDriver for Linux");
-        } else {
-            Log.error("Your OS is invalid for ChromeDriver tests");
-            assertTrue(false);
-        }
-        System.setProperty("webdriver.chrome.driver", path);
     }
 
     private static String osVersion() {

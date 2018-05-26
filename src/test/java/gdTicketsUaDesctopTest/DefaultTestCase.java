@@ -20,7 +20,7 @@ public class DefaultTestCase {
 
     @Parameters("browser")
     @BeforeTest
-    public void startTest(@Optional("ff") String browser) {
+    public void startTest(@Optional("firefox") String browser) {
         Log.info("========= * TestCase: \"" + testCaseName + "\" is started * =========");
         setWebDriver(browser);
     }

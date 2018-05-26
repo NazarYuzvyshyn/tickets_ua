@@ -2,7 +2,7 @@ package gdTicketsUaDesctop.utils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
-import ru.yandex.qatools.allure.annotations.Attachment;
+import io.qameta.allure.Attachment;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;

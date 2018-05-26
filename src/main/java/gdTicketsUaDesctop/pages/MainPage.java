@@ -1,26 +1,24 @@
 package gdTicketsUaDesctop.pages;
 import gdTicketsUaDesctop.businessObjects.Ticket;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 import java.time.LocalDate;
 import static gdTicketsUaDesctop.utils.Log.info;
 import static gdTicketsUaDesctop.utils.WaitFor.*;
-import static gdTicketsUaDesctop.utils.WaitFor.WaitCondition.VISIBIL;
+import static gdTicketsUaDesctop.utils.WaitFor.WaitCondition.VISIBLE;
 import static gdTicketsUaDesctop.utils.WebElementServices.clickOn;
 import static gdTicketsUaDesctop.utils.WebElementServices.sendKeysWithEnter;
 
-/**
- * @author Nazar on 03.11.2016.
- */
 public class MainPage {
 
-    private String from = "//*[@id='from_name_as']";
-    private String to = "//*[@id='to_name']";
-    private String round = "//*[@id='round_trip']/following-sibling::*";
-    private String forwardDate = "//*[@id='departure_date']";
-    private String backwardDate = "//*[@id='departure_date_back']";
-    private String calendar = "//*[@id='ui-datepicker-div']";
-    private String submit = "//*[contains(@class,'main-search__block')]//*[@type='submit']";
+    private By from = By.xpath("//*[@id='from_name_as']");
+    private By to = By.xpath("//*[@id='to_name']");
+    private By round = By.xpath("//*[@id='round_trip']/following-sibling::*");
+    private By forwardDate = By.xpath("//*[child::*[@id='departure_date']]");
+    private By backwardDate = By.xpath("//*[@id='departure_date_back']");
+    private By calendar = By.xpath("//*[@id='ui-datepicker-div']");
+    private By submit = By.xpath("//*[contains(@class,'main-search__block')]//*[@type='submit']");
 
     private Ticket ticket;
 
@@ -28,6 +26,7 @@ public class MainPage {
         this.ticket = ticket;
     }
 
+    @Step("Get Ticket")
     public void getTicket() {
         info("--------- Departure point ---------");
         sendKeysWithEnter("Откуда", ticket.getForwardCity(), from);
@@ -41,13 +40,13 @@ public class MainPage {
         setDate(ticket.getBackwardDate(), backwardDate);
     }
 
-    private void setDate(LocalDate date, String dateField){
+    private void setDate(LocalDate date, By dateField){
         clickOn("", dateField);
-        waitCondition(calendar, VISIBIL, 3);
+        waitCondition(calendar, VISIBLE, 3);
         String day = String.valueOf(date.getDayOfMonth());
         String month = String.valueOf(date.getMonthValue() - 1);
         String year = String.valueOf(date.getYear());
-        String xpath = "//*[@data-year='" + year + "' and @data-month='" + month + "']/*[text()='" + day + "']";
+        By xpath = By.xpath("//*[@data-year='" + year + "' and @data-month='" + month + "']/*[text()='" + day + "']");
         clickOn(date.toString(), xpath);
     }
 

@@ -3,6 +3,8 @@ package gdTicketsUaDesctop.utils.testCrestWest;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Telecom implements Inter, Inurik {
 
@@ -27,24 +29,7 @@ public class Telecom implements Inter, Inurik {
 
 
     public static void main(String[] args) {
-        Inter i = new Telecom();
-        List<String> list1 = new ArrayList<>();
-        list1.add("a");
-        list1.add("a");
-        list1.add("b");
-        List<String> list2 = new ArrayList<>();
-        list2.add("b");
-        list2.add("b");
-        list2.add("a");
-
-        i.kilo_2("s");
-
-        HashSet<String> set1 = new HashSet<>(list1);
-        HashSet<String> set2 = new HashSet<>(list2);
-        System.out.println(set1);
-        System.out.println(set2);
-        boolean g = set1.equals(set2);
-        System.out.println(g);
+        System.out.println(LocalDateTime.now());
     }
 
 

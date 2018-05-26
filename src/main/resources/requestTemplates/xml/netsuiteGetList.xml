@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:urn="urn:messages_2017_1.platform.webservices.netsuite.com"
+                  xmlns:urn1="urn:core_2017_1.platform.webservices.netsuite.com">
+    <soapenv:Header>
+        <urn:applicationInfo>
+            <urn:applicationId></urn:applicationId>
+        </urn:applicationInfo>
+        <urn:passport>
+            <urn1:email></urn1:email>
+            <urn1:password></urn1:password>
+            <urn1:account></urn1:account>
+            <urn1:role internalId=""/>
+        </urn:passport>
+        <urn:preferences soapenv:mustUnderstand="0">
+            <urn:ignoreReadOnlyFields>true</urn:ignoreReadOnlyFields>
+        </urn:preferences>
+    </soapenv:Header>
+
+    <soapenv:Body>
+        <urn:getList>
+            <baseRef externalId="" type="" xsi:type="platformCore:RecordRef"
+                     xmlns:platformCore="urn:core_2017_1.platform.webservices.netsuite.com"/>
+        </urn:getList>
+    </soapenv:Body>
+</soapenv:Envelope>

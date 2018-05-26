@@ -17,17 +17,17 @@ public class WaitFor {
         CLICKABLE,
         ENABLE,
         ELEMENT_ON_FOCUS,
-        VISIBIL,
-        PSESENCE,
+        VISIBLE,
+        PRESENCE,
         LIST_NOT_EMPTY
     }
 
-    public static void waitCondition(String locator, WaitCondition waitFor, long timeout) {
+    public static void waitCondition(By locator, WaitCondition waitFor, long timeout) {
         WebDriverWait wait = new WebDriverWait(getDriver(), timeout);
         try {
             switch (waitFor) {
                 case CLICKABLE:
-                    wait.until((WebDriver webDriver) -> elementToBeClickable(By.xpath(locator)));
+                    wait.until((WebDriver webDriver) -> elementToBeClickable(locator));
                     break;
                 case LIST_NOT_EMPTY:
                     wait.until((WebDriver webDriver) -> !getElements(locator).isEmpty());
@@ -35,11 +35,11 @@ public class WaitFor {
                 case ENABLE:
                     wait.until((WebDriver webDriver) -> getElement(locator).isEnabled());
                     break;
-                case PSESENCE:
-                    wait.until((WebDriver webDriver) -> presenceOfElementLocated(By.xpath(locator)));
+                case PRESENCE:
+                    wait.until((WebDriver webDriver) -> presenceOfElementLocated(locator));
                     break;
-                case VISIBIL:
-                    wait.until((WebDriver webDriver) -> visibilityOfElementLocated(By.xpath(locator)));
+                case VISIBLE:
+                    wait.until((WebDriver webDriver) -> visibilityOfElementLocated(locator));
                     break;
                 case ELEMENT_ON_FOCUS:
                     clickOn("Make focus on element", locator);
