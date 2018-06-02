@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import static gdTicketsUaDesctop.utils.TestFailure.failTest;
-import static gdTicketsUaDesctop.utils.Log.info;
+
 import java.net.MalformedURLException;
 import java.net.URI;
 import static gdTicketsUaDesctop.utils.CommonServices.moveToCoordinate;
@@ -32,9 +32,10 @@ public class WebDriverFactory {
     public static void setWebDriver(String browser) {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setBrowserName(browser);
-        capabilities.setCapability("enableVNC", true);
+//        capabilities.setCapability("enableVNC", true);
         capabilities.setCapability("enableVideo", true);
         capabilities.setCapability("videoName", LocalDateTime.now().toString());
+        capabilities.setCapability("videoScreenSize", "1366x768");
 
         try {
             DRIVER.set(new RemoteWebDriver(URI.create("http://localhost:4444/wd/hub").toURL(),
@@ -43,9 +44,8 @@ public class WebDriverFactory {
         } catch (MalformedURLException e) {
             failTest(e.getMessage());
         }
-        getDriver().manage().window().maximize();
         moveToCoordinate(0, 0, getDriver());
-        Log.info("Maximized window");
+//        AllureLoggerHandler.info("Maximized window");
     }
 
     private static String osVersion() {

@@ -1,12 +1,11 @@
 package gdTicketsUaDesctop.pages;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import java.time.LocalDate;
 import java.util.List;
-import static gdTicketsUaDesctop.utils.Log.info;
 import static gdTicketsUaDesctop.utils.WaitFor.waitForUrl;
 import static gdTicketsUaDesctop.utils.WebElementServices.*;
+import static gdTicketsUaDesctop.utils.loggers.Logger.info;
 
 /**
  * @author Nazar on 03.11.2016.

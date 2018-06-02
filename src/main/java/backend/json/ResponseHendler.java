@@ -5,7 +5,7 @@ import io.restassured.response.Response;
 import java.util.List;
 import java.util.Map;
 
-import static gdTicketsUaDesctop.utils.Log.info;
+import static gdTicketsUaDesctop.utils.loggers.Logger.info;
 
 public class ResponseHendler {
 
