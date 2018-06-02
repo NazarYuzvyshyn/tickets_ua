@@ -5,8 +5,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-
-import static gdTicketsUaDesctop.utils.loggers.Logger.error;
 import static org.testng.Assert.assertTrue;
 
 /**
@@ -24,8 +22,8 @@ public class PropertyReader {
             inputStream = new FileInputStream(file.getPath());
             properties.load(inputStream);
         } catch (IOException e) {
-            error("File doesn't exist or other IO exception");
-            error(e.getMessage());
+            Log.error("File doesn't exist or other IO exception");
+            Log.error(e.getMessage());
             assertTrue(false);
         }
     }

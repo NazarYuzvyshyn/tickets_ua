@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import static gdTicketsUaDesctop.utils.CommonServices.getUrl;
 import static gdTicketsUaDesctop.utils.WebDriverFactory.getDriver;
 import static gdTicketsUaDesctop.utils.WebElementServices.*;
-import static gdTicketsUaDesctop.utils.loggers.Logger.error;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 import static org.testng.Assert.assertTrue;
 
@@ -21,15 +20,6 @@ public class WaitFor {
         VISIBLE,
         PRESENCE,
         LIST_NOT_EMPTY
-    }
-
-    public static boolean waitConditionAndReturnStatus(By locator, WaitCondition waitFor, long timeout){
-        try {
-            WaitFor.waitCondition(locator, waitFor, timeout);
-            return true;
-        } catch (TimeoutException e) {
-            return false;
-        }
     }
 
     public static void waitCondition(By locator, WaitCondition waitFor, long timeout) {
@@ -55,7 +45,7 @@ public class WaitFor {
                     clickOn("Make focus on element", locator);
             }
         } catch (TimeoutException e) {
-            error(locator + " isn't " + waitFor.name());
+            Log.error(locator + " isn't " + waitFor.name());
             throw new TimeoutException(e);
         }
     }
@@ -66,7 +56,7 @@ public class WaitFor {
             wait.until((WebDriver webDriver) -> !getUrl().equals(staleUrl));
             waitPageLoad(60);
         } catch (TimeoutException e) {
-            error("<< Stale URL >> : " + staleUrl + " << Current URL >> : " + getUrl());
+            Log.error("<< Stale URL >> : " + staleUrl + " << Current URL >> : " + getUrl());
             assertTrue(false);
         }
     }
@@ -77,7 +67,7 @@ public class WaitFor {
             wait.until((WebDriver webDriver) -> getUrl().contains(newUrl));
             waitPageLoad(60);
         } catch (TimeoutException e) {
-            error(" << Current URL >> : " + getUrl() + " dosn't contains : " + newUrl);
+            Log.error(" << Current URL >> : " + getUrl() + " dosn't contains : " + newUrl);
             assertTrue(false);
         }
     }
@@ -88,7 +78,7 @@ public class WaitFor {
             wait.until((WebDriver webDriver) -> ((JavascriptExecutor) getDriver()).
                     executeScript("return document.readyState").equals("complete"));
         } catch (TimeoutException e) {
-            error("Page hasn't been loaded in " + timeout + " seconds");
+            Log.error("Page hasn't been loaded in " + timeout + " seconds");
             assertTrue(false);
         }
     }
