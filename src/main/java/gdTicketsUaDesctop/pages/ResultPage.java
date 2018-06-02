@@ -2,44 +2,48 @@ package gdTicketsUaDesctop.pages;
 
 import gdTicketsUaDesctop.businessObjects.Passenger;
 import gdTicketsUaDesctop.businessObjects.Ticket;
-import gdTicketsUaDesctop.utils.Log;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import java.util.List;
 import java.util.Random;
-import static gdTicketsUaDesctop.utils.Log.info;
 import static gdTicketsUaDesctop.utils.WaitFor.*;
 import static gdTicketsUaDesctop.utils.WaitFor.WaitCondition.LIST_NOT_EMPTY;
 import static gdTicketsUaDesctop.utils.WaitFor.WaitCondition.ENABLE;
+import static gdTicketsUaDesctop.utils.WaitFor.WaitCondition.VISIBLE;
 import static gdTicketsUaDesctop.utils.WebDriverFactory.getDriver;
 import static gdTicketsUaDesctop.utils.WebElementServices.*;
+import static gdTicketsUaDesctop.utils.loggers.AllureLoggerHandler.attachLogsToStep;
+import static gdTicketsUaDesctop.utils.loggers.AllureLoggerHandler.saveLogs;
+import static gdTicketsUaDesctop.utils.loggers.Logger.info;
 
 /**
  * @author Nazar on 03.11.2016.
  */
 public class ResultPage {
 
-    private String typeName = "//span";
-    private String trainCategories = "//*[contains(@class,'free-places') and preceding-sibling::*[contains(@class,'train')]]";
+    private String typeName = "//*[contains(@class,'results__item-seats__type')]";
+    private String trainCategories = "//*[contains(@class,'free-places') " +
+                                     "and ancestor::*[@data-auto-controller='RailwayTrainController']]";
     private String freePlaces = "//*[contains(@class,'sits_block')]//a";
 
-    private By trains = By.xpath("//*[contains(@class,'train') and not(contains(@class,'your'))]/strong");
-    private By firstName = By.xpath("//*[contains(@id,'firstname')]");
-    private By lastName = By.xpath("//*[contains(@id,'lastname')]");
+    private By trains = By.xpath("//*[@data-auto-controller='RailwayTrainController']");
+    private By firstName = By.xpath("//*[contains(@id,'first_name')]");
+    private By lastName = By.xpath("//*[contains(@id,'last_name')]");
     private By phoneCode = By.xpath("//*[@id='buyer_data']//*[@id='phone_code']");
-    private By phone = By.xpath("//*[@id='buyer_data']//*[@id='phone_number']");
+    private By phone = By.xpath("//*[@id='user_field[phone]']");
     private By ageType = By.xpath("//*[text()='Тип пассажира']/..//*[contains(@class,'chosen-single')]");
-    private By oneTea = By.xpath("//*[@id='services_service_2']");
-    private By twoTea = By.xpath("//*[@id='services_service_3']");
+    private By drink = By.xpath("//*[@id='drink']");
+    private By oneTea = By.xpath("//*[@id='services_service_5']");
+    private By twoTea = By.xpath("//*[@id='services_service_6']");
     private By cargo = By.xpath("//*[@name='cargo']");
     private By noBed = By.xpath("//*[@id='bed']");
     private By buy = By.xpath("//*[@id='operation_type_3']");
-    private By price = By.xpath("//*[contains(@class,'buy-block')]//strong[not(contains(@class,'old-price'))]");
+    private By price = By.xpath("//*[contains(@class,'js-price-item-total')]");
     private By reserve = By.xpath("//*[@id='operation_type_1']");
-    private By acceptOfferta = By.xpath("//*[@id='i_accept_offerta']/..");
+    private By acceptOfferta = By.xpath("//*[@id='add-insurance']");
     private By submit = By.xpath("//*[contains(@class,'buy-block')]//*[@type='submit']");
-    private By email = By.xpath("//*[@id='user_form']//*[@id='email']");
+    private By email = By.xpath("//*[@id='user_field[email]']");
     private By lastFirstNames = By.xpath("//*[@id='user_form']//*[@id='name']");
 
     private Passenger passenger;
@@ -57,15 +61,17 @@ public class ResultPage {
      * and if trip is round write to Ticket object each one train name
      * @return index of this train in result list
      */
+    @Step("Get random train")
     public int getRandomTrain() {
         waitCondition(trains, LIST_NOT_EMPTY, 10);
         List<WebElement> listOfTrains = getElements(trains);
         int index = random.nextInt(listOfTrains.size());
-        String text = getTextContent(listOfTrains.get(index));
+        String text = getText(listOfTrains.get(index));
         info("--------------- Train -------------");
         info("Поезд: " + text);
         if (counter == 0)ticket.trainNumber = text;
         else ticket.trainNumberRound = text;
+        attachLogsToStep();
         return index;
     }
 
@@ -83,14 +89,13 @@ public class ResultPage {
         List<WebElement> typeNames = getElements(blockAsXpath);
 
         int typeIndex = random.nextInt(typeNames.size());
-        String text = getTextContent(typeNames.get(typeIndex));
+        String text = getText(typeNames.get(typeIndex));
 
-        String chooseType = "(" + block + typeName + "/../a)[" + (typeIndex + 1) + "]";
-        clickOn("Тип: " + text, By.xpath(chooseType));
+        String submitButton = block + typeName + "/..//a";
+        clickOn("Тип: " + text, By.xpath(submitButton));
 
         if (counter == 0)ticket.placeType = text;
         else ticket.placeTypeRound = text;
-        throw new RuntimeException();
     }
 
     /**
@@ -101,7 +106,7 @@ public class ResultPage {
         List<WebElement> places = getElements(By.xpath(freePlaces));
 
         int placesIndex = random.nextInt(places.size());
-        String text = getTextContent(places.get(placesIndex));
+        String text = getText(places.get(placesIndex));
 
         String place = "(" + freePlaces + ")[" + (placesIndex + 1) + "]";
         clickOn("Место: " + text, By.xpath(place));
@@ -119,10 +124,22 @@ public class ResultPage {
     }
 
     public void extraServices() {
-        if (this.passenger.getNoBed().equals("true")) clickOn("Без постельного белья", noBed);
-        if (this.passenger.getCargo().equals("true")) clickOn("Дополнительный багаж ", cargo);
-        if (this.passenger.getTea().equals("1")) clickOn("Чай", oneTea);
-        if (this.passenger.getTea().equals("2")) clickOn("2 чая", twoTea);
+        if (this.passenger.getNoBed().equals("true") && waitConditionAndReturnStatus(noBed, VISIBLE, 2)) {
+            clickOn("Без постельного белья", noBed);
+        }
+        if (this.passenger.getCargo().equals("true") && waitConditionAndReturnStatus(cargo, VISIBLE, 2)){
+            clickOn("Дополнительный багаж ", cargo);
+        }
+        if (this.passenger.getTea().equals("1") && waitConditionAndReturnStatus(drink, VISIBLE, 2)) {
+            clickOn("Напиток",drink);
+            if (waitConditionAndReturnStatus(oneTea, VISIBLE, 2))
+                clickOn("Чай", oneTea);
+        }
+        if (this.passenger.getTea().equals("2") && waitConditionAndReturnStatus(drink, VISIBLE, 2)) {
+            clickOn("Напиток",drink);
+            if (waitConditionAndReturnStatus(twoTea, VISIBLE, 2))
+                clickOn("2 чая", twoTea);
+        }
     }
 
     public void reserve() {
@@ -136,7 +153,7 @@ public class ResultPage {
         else ticket.priceRound = text;
         counter = 1;
         String currentUrl = getDriver().getCurrentUrl();
-        Log.info("-----------------------------------");
+        info("-----------------------------------");
         clickOn("Продолжить", submit);
         waitChangeUrl(currentUrl);
     }

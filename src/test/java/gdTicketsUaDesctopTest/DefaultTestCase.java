@@ -1,36 +1,45 @@
 package gdTicketsUaDesctopTest;
 
-import gdTicketsUaDesctop.utils.Log;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 import static gdTicketsUaDesctop.utils.CommonServices.clearCookies;
 import static gdTicketsUaDesctop.utils.CommonServices.getTestClassName;
 import static gdTicketsUaDesctop.utils.WebDriverFactory.killDriver;
 import static gdTicketsUaDesctop.utils.WebDriverFactory.setWebDriver;
+import static gdTicketsUaDesctop.utils.loggers.AllureLoggerHandler.*;
+import static gdTicketsUaDesctop.utils.loggers.Logger.info;
+import static gdTicketsUaDesctop.utils.loggers.Logger.initLogFile;
 
-/**
- * @author Назар on 04.11.2016.
- */
+
 public class DefaultTestCase {
 
     private String testCaseName = getTestClassName(this.getClass().toString());
+    private String logFilePath = initLogFile();
+
+    @BeforeSuite
+    public void beforeSuite() {
+        initAllureLoggerHandler(logFilePath);
+    }
+
+    @AfterSuite
+    public void afterSuite() {
+        closeLogFile();
+    }
 
     @Parameters("browser")
     @BeforeTest
     public void startTest(@Optional("firefox") String browser) {
-        Log.info("========= * TestCase: \"" + testCaseName + "\" is started * =========");
+        info("========= * TestCase: \"" + testCaseName + "\" is started * =========");
         setWebDriver(browser);
+        attachLogsToStep();
     }
 
     @AfterTest
     public void afterTest() {
         clearCookies();
         killDriver();
-        Log.info("Browser has been closed");
-        Log.info("========= * TestCase: \"" + testCaseName + "\" is finished * =========");
+        info("Browser has been closed");
+        info("========= * TestCase: \"" + testCaseName + "\" is finished * =========");
     }
 
 }

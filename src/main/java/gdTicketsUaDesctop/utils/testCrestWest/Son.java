@@ -1,5 +1,8 @@
 package gdTicketsUaDesctop.utils.testCrestWest;
 
+import org.openqa.selenium.By;
+
+import java.io.*;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -13,6 +16,10 @@ class Son extends Dad
     public String catalogItemType;
     public String catalogType;
     private static String statuari = "SANCTUS";
+
+    static File file;
+    static FileInputStream fis;
+    static FileOutputStream fos;
 
 
 
@@ -34,6 +41,13 @@ class Son extends Dad
 //        statuari = rufus;
     }
 
+    static void clean(){
+        try {
+            fos = new FileOutputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     @Override
@@ -50,11 +64,9 @@ class Son extends Dad
     }
 
     public static void main(String[] args) {
-        int op;
-       if (2 == 2){
-            op = 23569;
-       }
+        By from = By.xpath("//*[@id='from_name_as']");
+        String po = from.toString().replaceAll("By\\.\\w{1,10}:\\s", "");
 
-        System.out.println(op);
+        System.out.println("'"+po+"'");
     }
 }

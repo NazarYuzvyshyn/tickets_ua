@@ -4,6 +4,7 @@ import gdTicketsUaDesctop.utils.PropertyReader;
 import java.time.LocalDate;
 import java.util.Random;
 import static gdTicketsUaDesctop.Constants.PROPERTY_LOCATION;
+import static gdTicketsUaDesctop.utils.loggers.Logger.info;
 import static java.lang.Integer.parseInt;
 
 /**
@@ -60,6 +61,7 @@ public class Ticket {
             days = ran.nextInt(days);
         }
         date = date.plusDays(days);
+        info(String.format("Was added %s days from now, new date: %s", days, date));
         return date;
     }
 
@@ -72,10 +74,12 @@ public class Ticket {
     }
 
     public LocalDate getForwardDate() {
+        info(String.format("Forward date: %s", forwardDate));
         return forwardDate;
     }
 
     public LocalDate getBackwardDate() {
+        info(String.format("Backward date: %s", backwardDate));
         return backwardDate;
     }
 
