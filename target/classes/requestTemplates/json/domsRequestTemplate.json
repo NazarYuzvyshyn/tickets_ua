@@ -1,0 +1,14 @@
+{
+  "orderLineId": "",
+  "event": "",
+  "eventMetadata": {
+    "resumeDate": "",
+    "internalId": ""
+  },
+  "refundAmount": {
+    "tax": 0.00,
+    "shippingPrice": 0.00,
+    "itemPrice": 0.00,
+    "total": 0.00
+  }
+}

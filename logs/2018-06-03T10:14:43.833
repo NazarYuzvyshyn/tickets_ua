@@ -1,0 +1,7 @@
+10:14:44,088  LOG_FILE: /home/nazar/PROGRAMMIROVANIE/MY_JAVA/intellijProjects/tickets_ua/logs/2018-06-03T10:14:43.833 
+10:14:44,375  'event' set 'pause' 
+10:14:44,375  'eventMetadata.resumeDate' set '2018-11-17' 
+10:14:44,375  'orderLineId' set '947359150' 
+10:14:50,819  Was used direct json key: errors[0].errorMessage 
+10:14:50,819  And got value: pause cannot be applied to state pendingPause for item type FIXED_RECURRING_ITEM 
+10:14:50,819  The value is type of: String 
