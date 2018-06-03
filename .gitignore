@@ -1,0 +1,7 @@
+.gitignore
+.idea/*
+allure-report/*
+allure-results/*
+logs/*
+target/*
+video/*

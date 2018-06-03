@@ -9,8 +9,7 @@ import static backend.json.JsonRequestTemplateConverter.convertFileToJson;
 
 import io.restassured.response.Response;
 import static gdTicketsUaDesctop.Constants.DOMS_EVENT_ENDPOINT;
-
-import java.util.*;
+import static gdTicketsUaDesctop.utils.loggers.Logger.initLogFile;
 
 
 public class JsonRequestMain {
@@ -38,20 +37,20 @@ public class JsonRequestMain {
 //        }
 //        }
 
+        initLogFile();
 
         JsonObject json = convertFileToJson("domsRequestTemplate.json");
 
         DomsRequestBuilder drb = new DomsRequestBuilder(json);
-        json = drb.withEvent("pause").
+        String body = drb.withEvent("pause").
                 withEventMetadataResumeDate("2018-11-17").
                 withOrderLineId("947359150").
-                buildJsonRequestObject();
-
-        List<JsonObject> bodyAsList = new ArrayList<>();
-        bodyAsList.add(json);
+                buildJsonRequestString();
 
 
         JsonApi jsonApi = new JsonApi();
+        String bodyAsList = jsonApi.jsonStringAsList(body);
+
         Response response = jsonApi.postJson(DOMS_EVENT_ENDPOINT, bodyAsList);
         System.out.println(">>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
         String message = ResponseHendler.getValue(response, "errors[0].errorMessage");

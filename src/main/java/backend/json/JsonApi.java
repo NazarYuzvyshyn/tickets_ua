@@ -28,31 +28,35 @@ public class JsonApi {
                 get(requestUrl);
     }
 
-    public Response postJson(String requestUrl, Map<String, String> headers, JsonObject requestBody) {
+    public Response postJson(String requestUrl, Map<String, String> headers, String requestBody) {
         extendDefaultHeaders(headers);
         return post(requestUrl, requestHeaders, requestBody);
     }
+//
+//    public Response postJson(String requestUrl, Map<String, String> headers, String requestBody) {
+//        extendDefaultHeaders(headers);
+//        return post(requestUrl, requestHeaders, requestBody);
+//    }
 
-    public Response postJson(String requestUrl, Map<String, String> headers, List<JsonObject> requestBody) {
-        extendDefaultHeaders(headers);
+//    public Response postJson(String requestUrl, String requestBody) {
+//        return post(requestUrl, requestHeaders, requestBody);
+//    }
+
+    public Response postJson(String requestUrl, String requestBody) {
         return post(requestUrl, requestHeaders, requestBody);
     }
 
-    public Response postJson(String requestUrl, JsonObject requestBody) {
-        return post(requestUrl, requestHeaders, requestBody);
-    }
-
-    public Response postJson(String requestUrl, List<JsonObject> requestBody) {
-        return post(requestUrl, requestHeaders, requestBody);
-    }
-
-    private Response post(String requestUrl, Map<String, ?> requestHeaders, Object requestBody) {
+    private Response post(String requestUrl, Map<String, String> requestHeaders, String requestBody) {
         return given().
                 headers(requestHeaders).
                 body(requestBody).
                 log().uri().log().headers().log().body().
                 when().
                 post(requestUrl).prettyPeek();
+    }
+
+    public String jsonStringAsList(String payload){
+        return "[ " + payload + " ]";
     }
 
     private void extendDefaultHeaders(Map<String, String> headers) {

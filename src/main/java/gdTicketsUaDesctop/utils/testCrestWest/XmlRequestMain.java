@@ -11,10 +11,13 @@ import java.util.Map;
 
 import static gdTicketsUaDesctop.Constants.PROPERTY_LOCATION;
 import static gdTicketsUaDesctop.Constants.NETSUITE_LOAD_HOST;
+import static gdTicketsUaDesctop.utils.loggers.Logger.initLogFile;
 
 public class XmlRequestMain {
 
     public static void main(String[] args) {
+
+        initLogFile();
 
         PropertyReader prop = new PropertyReader(PROPERTY_LOCATION + "netsuite/getListRequest.properties");
 

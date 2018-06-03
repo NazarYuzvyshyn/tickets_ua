@@ -70,11 +70,10 @@ public class DomsRequestBuilder {
         return this;
     }
 
-    public JsonObject buildJsonRequestObject(){
-        JsonElement jsonElement = new GsonBuilder().create().toJsonTree(this);
-        return (JsonObject) jsonElement;
+    public String buildJsonRequestString(){
+        Gson gson = new GsonBuilder().serializeNulls().create();
+        return gson.toJson(this);
     }
-
 
     private class EventMetaData {
         private String resumeDate;
