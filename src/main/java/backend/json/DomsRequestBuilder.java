@@ -4,7 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import gdTicketsUaDesctop.utils.Log;
+
+import static gdTicketsUaDesctop.utils.loggers.Logger.info;
 
 
 public class DomsRequestBuilder {
@@ -23,57 +24,56 @@ public class DomsRequestBuilder {
 
     public DomsRequestBuilder withOrderLineId(String value){
         orderLineId = value;
-        Log.info(String.format("\'orderLineId\' set \'%s\'", value));
+        info(String.format("\'orderLineId\' set \'%s\'", value));
         return this;
     }
 
     public DomsRequestBuilder withEvent(String value){
         event = value;
-        Log.info(String.format("\'event\' set \'%s\'", value));
+        info(String.format("\'event\' set \'%s\'", value));
         return this;
     }
 
     public DomsRequestBuilder withEventMetadataResumeDate(String value){
         eventMetadata.resumeDate = value;
-        Log.info(String.format("\'eventMetadata.resumeDate\' set \'%s\'", value));
+        info(String.format("\'eventMetadata.resumeDate\' set \'%s\'", value));
         return this;
     }
 
     public DomsRequestBuilder withEventMetadataInternalId(String value){
         eventMetadata.internalId = value;
-        Log.info(String.format("\'eventMetadata.internalId\' set \'%s\'", value));
+        info(String.format("\'eventMetadata.internalId\' set \'%s\'", value));
         return this;
     }
 
     public DomsRequestBuilder withRefundAmountTax(Double value){
         refundAmount.tax = value;
-        Log.info(String.format("\'refundAmount.tax\' set \'%s\'", value));
+        info(String.format("\'refundAmount.tax\' set \'%s\'", value));
         return this;
     }
 
     public DomsRequestBuilder withRefundAmountTotal(Double value){
         refundAmount.total = value;
-        Log.info(String.format("\'refundAmount.total\' set \'%s\'", value));
+        info(String.format("\'refundAmount.total\' set \'%s\'", value));
         return this;
     }
 
     public DomsRequestBuilder withRefundAmountItemPrice(Double value){
         refundAmount.itemPrice = value;
-        Log.info(String.format("\'refundAmount.itemPrice\' set \'%s\'", value));
+        info(String.format("\'refundAmount.itemPrice\' set \'%s\'", value));
         return this;
     }
 
     public DomsRequestBuilder withRefundAmountShippingPrice(Double value){
         refundAmount.shippingPrice = value;
-        Log.info(String.format("\'refundAmount.shippingPrice\' set \'%s\'", value));
+        info(String.format("\'refundAmount.shippingPrice\' set \'%s\'", value));
         return this;
     }
 
-    public JsonObject buildJsonRequestObject(){
-        JsonElement jsonElement = new GsonBuilder().create().toJsonTree(this);
-        return (JsonObject) jsonElement;
+    public String buildJsonRequestString(){
+        Gson gson = new GsonBuilder().serializeNulls().create();
+        return gson.toJson(this);
     }
-
 
     private class EventMetaData {
         private String resumeDate;
