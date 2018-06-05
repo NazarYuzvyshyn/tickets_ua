@@ -27,7 +27,7 @@ public class ResultPage {
                                      "and ancestor::*[@data-auto-controller='RailwayTrainController']]";
     private String freePlaces = "//*[contains(@class,'sits_block')]//a";
 
-    private By trains = By.xpath("//*[@data-auto-controller='RailwayTrainController']");
+    private String trains = "//*[@data-auto-controller='RailwayTrainController']";
     private By firstName = By.xpath("//*[contains(@id,'first_name')]");
     private By lastName = By.xpath("//*[contains(@id,'last_name')]");
     private By phoneCode = By.xpath("//*[@id='buyer_data']//*[@id='phone_code']");
@@ -48,8 +48,8 @@ public class ResultPage {
 
     private Passenger passenger;
     private Ticket ticket;
-    private int counter = 0;
     private Random random = new Random();
+    private String trainNumberAndName;
 
     public ResultPage(Passenger passenger, Ticket ticket) {
         this.passenger = passenger;
@@ -61,18 +61,39 @@ public class ResultPage {
      * and if trip is round write to Ticket object each one train name
      * @return index of this train in result list
      */
-    @Step("Get random train")
     public int getRandomTrain() {
-        waitCondition(trains, LIST_NOT_EMPTY, 10);
-        List<WebElement> listOfTrains = getElements(trains);
+        waitCondition(By.xpath(trains), LIST_NOT_EMPTY, 10);
+        List<WebElement> listOfTrains = getElements(By.xpath(trains));
         int index = random.nextInt(listOfTrains.size());
-        String text = getText(listOfTrains.get(index));
+
+        String trainNumberLocator = "(" + trains + ")" + "[" + index + "]" + "//strong";
+        WebElement trainNumber = getElement(By.xpath(trainNumberLocator));
+        String trainNumberAsText = getText(trainNumber);
+
+        String trainNameLocator = trainNumberLocator + "/following-sibling::div";
+        WebElement trainName = getElement(By.xpath(trainNameLocator));
+        String trainNameAsText = getText(trainName);
+
+        trainNumberAndName = trainNumberAsText + " " + trainNameAsText;
         info("--------------- Train -------------");
-        info("Поезд: " + text);
-        if (counter == 0)ticket.trainNumber = text;
-        else ticket.trainNumberRound = text;
-        attachLogsToStep();
+        info("Поезд: " + trainNumberAndName);
         return index;
+    }
+
+    @Step("Get backward random train")
+    public int getBackwardRandomTrain() {
+        int randomTrainIndex = getRandomTrain();
+        ticket.trainNumberRound = trainNumberAndName;
+        attachLogsToStep();
+        return randomTrainIndex;
+    }
+
+    @Step("Get forward random train")
+    public int getForwardRandomTrain() {
+        int randomTrainIndex = getRandomTrain();
+        ticket.trainNumber = trainNumberAndName;
+        attachLogsToStep();
+        return randomTrainIndex;
     }
 
     /**
@@ -94,8 +115,8 @@ public class ResultPage {
         String submitButton = block + typeName + "/..//a";
         clickOn("Тип: " + text, By.xpath(submitButton));
 
-        if (counter == 0)ticket.placeType = text;
-        else ticket.placeTypeRound = text;
+//        if (counter == 0)ticket.placeType = text;
+//        else ticket.placeTypeRound = text;
     }
 
     /**
@@ -110,8 +131,8 @@ public class ResultPage {
 
         String place = "(" + freePlaces + ")[" + (placesIndex + 1) + "]";
         clickOn("Место: " + text, By.xpath(place));
-        if (counter ==0)ticket.placeNumber = text;
-        else ticket.placeNumberRound = text;
+//        if (counter ==0)ticket.placeNumber = text;
+//        else ticket.placeNumberRound = text;
     }
 
     /**
@@ -148,10 +169,10 @@ public class ResultPage {
     }
 
     public void submit() {
-        String text = getTextContent(getElement(price));
-        if (counter == 0)ticket.price = text;
-        else ticket.priceRound = text;
-        counter = 1;
+//        String text = getTextContent(getElement(price));
+//        if (counter == 0)ticket.price = text;
+//        else ticket.priceRound = text;
+//        counter = 1;
         String currentUrl = getDriver().getCurrentUrl();
         info("-----------------------------------");
         clickOn("Продолжить", submit);

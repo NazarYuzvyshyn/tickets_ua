@@ -16,12 +16,6 @@ public class Logger {
         return threadSafeLogFile;
     }
 
-//    String getLogFilePath(){
-//        return threadSafeLogFile;
-//    }
-
-//    public abstract void saveLogs();
-
     public static void info(String message) {
         Log.info(message);
     }

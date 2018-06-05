@@ -14,10 +14,10 @@ import static gdTicketsUaDesctop.utils.loggers.Logger.initLogFile;
 public class DefaultTestCase {
 
     private String testCaseName = getTestClassName(this.getClass().toString());
-    private String logFilePath = initLogFile();
 
     @BeforeSuite
     public void beforeSuite() {
+        String logFilePath = initLogFile();
         initAllureLoggerHandler(logFilePath);
     }
 
