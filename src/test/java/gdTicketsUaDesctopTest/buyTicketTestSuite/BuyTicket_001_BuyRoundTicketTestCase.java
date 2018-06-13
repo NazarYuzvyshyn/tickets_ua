@@ -4,7 +4,8 @@ import gdTicketsUaDesctop.businessObjects.Passenger;
 import gdTicketsUaDesctop.businessObjects.Ticket;
 import gdTicketsUaDesctop.pages.MainPage;
 import gdTicketsUaDesctop.pages.PurchasePage;
-import gdTicketsUaDesctop.pages.ResultPage;
+import gdTicketsUaDesctop.pages.resultPage.ExtraServices;
+import gdTicketsUaDesctop.pages.resultPage.ResultPage;
 import gdTicketsUaDesctop.utils.PropertyReader;
 import gdTicketsUaDesctop.utils.TestListener;
 import gdTicketsUaDesctopTest.DefaultTestCase;
@@ -19,34 +20,47 @@ import static gdTicketsUaDesctop.Constants.PROPERTY_LOCATION;
 import static gdTicketsUaDesctop.utils.CommonServices.goTo;
 import static org.testng.Assert.assertTrue;
 
-/**
- * @author Nazar on 04.11.2016.
- */
+
 @Listeners({TestListener.class})
 @Feature("Buy Tickets Feature")
 public class BuyTicket_001_BuyRoundTicketTestCase extends DefaultTestCase {
 
-    private Ticket ticket = new Ticket("buyRound.properties", "random");
-    private MainPage mainPage = new MainPage(ticket);
-    private ResultPage resultPage;
-    private PurchasePage purchasePage = new PurchasePage();
+    private Ticket forwardTicket;
+    private Ticket backwardTicket;
+    private Passenger passenger;
+    private PurchasePage purchasePage;
 
     @BeforeTest
-    public void before(){
-        PropertyReader propertyReader = new PropertyReader(
-                PROPERTY_LOCATION + "passenger/adult.properties");
-        Passenger pass = new Passenger.PassengerBuilder().
+    public void before() {
+        forwardTicket = new Ticket();
+        forwardTicket.extraServices = new ExtraServices();
+
+        forwardTicket.setDepartureCity("Львов");
+        forwardTicket.setArrivalCity("Киев");
+        forwardTicket.setDepartureDaysInRandomRange(7);
+//        forwardTicket.extraServices.setCargo(true);
+//        forwardTicket.extraServices.setOneTea(true);
+
+
+        backwardTicket = new Ticket();
+        backwardTicket.extraServices = new ExtraServices();
+
+//        backwardTicket.setDepartureCity("Киев");
+//        backwardTicket.setArrivalCity("Львов");
+        backwardTicket.setDepartureDate(forwardTicket.getDepartureDate().plusDays(3));
+//        backwardTicket.extraServices.setTwoTea(true);
+//        backwardTicket.extraServices.setNoBed(true);
+
+        purchasePage = new PurchasePage();
+
+        PropertyReader propertyReader = new PropertyReader(PROPERTY_LOCATION + "passenger/adult.properties");
+        passenger = new Passenger.PassengerBuilder().
                 withFirstName(propertyReader.getValue("firstName")).
                 withLastName(propertyReader.getValue("lastName")).
                 withEmail(propertyReader.getValue("email")).
                 withPhone(propertyReader.getValue("phone")).
-                withTea(propertyReader.getValue("tea")).
-                withCargo(propertyReader.getValue("cargo")).
-                withNoBed(propertyReader.getValue("noBed")).
                 build();
-        resultPage = new ResultPage(pass,ticket);
     }
-
 
 
     @Test
@@ -55,40 +69,52 @@ public class BuyTicket_001_BuyRoundTicketTestCase extends DefaultTestCase {
 
         goTo(BASE_URL);
 
-        mainPage.getTicket();
-        mainPage.getRoundTrip();
-        mainPage.search();
+        MainPage forwardTicketMainPage = new MainPage(forwardTicket);
+        forwardTicketMainPage.getTicket();
 
-        resultPage.getRandomPlaceType(resultPage.getRandomTrain());
-        resultPage.getRandomPlace();
-        resultPage.fillContacts();
-        resultPage.fillPassengerForm();
-        resultPage.extraServices();
-        resultPage.acceptOfferta();
-        resultPage.submit();
+        MainPage backwardTicketMainPage = new MainPage(backwardTicket);
+        backwardTicketMainPage.getRoundTrip();
+
+        backwardTicketMainPage.search();
+
+        ResultPage forwardTicketResultPage = new ResultPage(passenger, forwardTicket);
+        forwardTicketResultPage.getRandomPlaceType(forwardTicketResultPage.getRandomTrain());
+        forwardTicketResultPage.getRandomPlace();
+        forwardTicketResultPage.fillContacts();
+        forwardTicketResultPage.fillPassengerForm();
+
+        forwardTicketResultPage.checkOneTea();
+        forwardTicketResultPage.checkCargo();
+
+        forwardTicketResultPage.acceptOfferta();
+        forwardTicketResultPage.submit();
+
+//=========== Choosing a backward ticket =============//
+        ResultPage backwardTicketResultPage = new ResultPage(passenger, backwardTicket);
+        backwardTicketResultPage.getRandomPlaceType(backwardTicketResultPage.getRandomTrain());
+        backwardTicketResultPage.getRandomPlace();
+
+        backwardTicketResultPage.checkTwoTea();
+        backwardTicketResultPage.checkNoBed();
+
+        backwardTicketResultPage.submit();
+
+////=========== Checking of forwardTicket correctness =========//
 //
-////=========== Choosing a backward ticket =============//
-//
-//        resultPage.getRandomPlaceType(resultPage.getRandomTrain());
-//        resultPage.getRandomPlace();
-//        resultPage.submit();
-//
-////=========== Checking of ticket correctness =========//
-//
-//        assertTrue(purchasePage.confirmTrain(ticket.trainNumber));
-//        assertTrue(purchasePage.confirmTrain(ticket.trainNumberRound));
+//        assertTrue(purchasePage.confirmTrain(forwardTicket.trainNumberAndName));
+//        assertTrue(purchasePage.confirmTrain(forwardTicket.trainNumberRound));
 //
 //        assertTrue(purchasePage.confirmDateAndCity(
-//                ticket.getForwardDate(),ticket.getForwardCity()));
+//                forwardTicket.getForwardDate(),forwardTicket.getForwardCity()));
 //        assertTrue(purchasePage.confirmDateAndCity(
-//                ticket.getBackwardDate(),ticket.getBackwardCity()));
+//                forwardTicket.getBackwardDate(),forwardTicket.getArrivalCity()));
 //
 //        assertTrue(purchasePage.confirmNameAndPlaceType(
-//                ticket.lastFirstNames,ticket.placeType));
+//                forwardTicket.lastFirstNames,forwardTicket.placeType));
 //        assertTrue(purchasePage.confirmNameAndPlaceType(
-//                ticket.lastFirstNames,ticket.placeTypeRound));
+//                forwardTicket.lastFirstNames,forwardTicket.placeTypeRound));
 //
-//        assertTrue(purchasePage.confirmPrice(ticket.price,ticket.priceRound));
+//        assertTrue(purchasePage.confirmPrice(forwardTicket.price,forwardTicket.priceRound));
 //
 ////========== Confirm paying =============//
 //

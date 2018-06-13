@@ -11,7 +11,6 @@ import static gdTicketsUaDesctop.utils.WaitFor.*;
 import static gdTicketsUaDesctop.utils.WebElementServices.clickOn;
 import static gdTicketsUaDesctop.utils.WebElementServices.sendKeysWithEnter;
 import static gdTicketsUaDesctop.utils.loggers.AllureLoggerHandler.attachLogsToStep;
-import static gdTicketsUaDesctop.utils.loggers.AllureLoggerHandler.saveLogs;
 import static gdTicketsUaDesctop.utils.loggers.Logger.info;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 
@@ -26,27 +25,25 @@ public class MainPage {
     private By submit = By.xpath("//*[contains(@class,'search__form')]//*[@type='submit']");
 
     private Ticket ticket;
-    private AllureLoggerHandler allureLogger;
 
     public MainPage(Ticket ticket) {
         this.ticket = ticket;
-        this.allureLogger = allureLogger;
     }
 
     @Step("Try to get a forward date")
     public void getTicket() {
         info("--------- Departure point ---------");
-        sendKeysWithEnter("Откуда", ticket.getForwardCity(), from);
+        sendKeysWithEnter("Откуда", ticket.getDepartureCity(), from);
         info("----------- Arrival point -----------");
-        sendKeysWithEnter("Куда", ticket.getBackwardCity(), to);
-        setDate(ticket.getForwardDate(), forwardDate);
+        sendKeysWithEnter("Куда", ticket.getArrivalCity(), to);
+        setDate(ticket.getDepartureDate(), forwardDate);
         attachLogsToStep();
     }
 
     @Step("Try to get a backward date")
     public void getRoundTrip() {
         clickOn("'В обе стороны'", round);
-        setDate(ticket.getBackwardDate(), backwardDate);
+        setDate(ticket.getDepartureDate(), backwardDate);
         attachLogsToStep();
     }
 
