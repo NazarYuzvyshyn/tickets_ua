@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="49b02be8-1085-42aa-90e3-24dc684e04bc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/gdTicketsUaDesctop/pages/resultPage/ExtraServices.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/properties/ticket/kiev_lviv.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/properties/ticket/lviv_kiev.properties" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/properties/ticket/buyRound.properties" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/gdTicketsUaDesctop/pages/ResultPage.java" afterPath="$PROJECT_DIR$/src/main/java/gdTicketsUaDesctop/pages/resultPage/ResultPage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gdTicketsUaDesctop/businessObjects/Ticket.java" afterPath="$PROJECT_DIR$/src/main/java/gdTicketsUaDesctop/businessObjects/Ticket.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gdTicketsUaDesctop/pages/MainPage.java" afterPath="$PROJECT_DIR$/src/main/java/gdTicketsUaDesctop/pages/MainPage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/properties/passenger/adult.properties" afterPath="$PROJECT_DIR$/src/main/resources/properties/passenger/adult.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/gdTicketsUaDesctopTest/buyTicketTestSuite/BuyTicket_001_BuyRoundTicketTestCase.java" afterPath="$PROJECT_DIR$/src/test/java/gdTicketsUaDesctopTest/buyTicketTestSuite/BuyTicket_001_BuyRoundTicketTestCase.java" />
-    </list>
+    <list default="true" id="49b02be8-1085-42aa-90e3-24dc684e04bc" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -309,7 +299,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-4" />
     <option name="y" value="-4" />
     <option name="width" value="1374" />
@@ -569,7 +559,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="-4" width="1366" height="724" extended-state="7" />
+    <frame x="-4" y="-4" width="1366" height="724" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293718" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
