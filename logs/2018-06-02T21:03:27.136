@@ -1,8 +1,0 @@
-21:03:27,544  LOG_FILE: /home/nazar/PROGRAMMIROVANIE/MY_JAVA/intellijProjects/tickets_ua/logs/2018-06-02T21:03:27.136 
-21:03:27,789  'event' set 'pause' 
-21:03:27,790  'eventMetadata.resumeDate' set '2018-11-17' 
-21:03:27,790  'orderLineId' set '947359150' 
-21:03:35,613  Was used direct json key: errors[0].errorMessage 
-21:03:35,614  And got value: JSON parse error: Can not construct instance of com.chegg.doms.model.request.EventRequest: no String-argument constructor/factory method to deserialize from String value ('{"orderLineId":"947359150","event":"pause","eventMetadata":{"resumeDate":"2018-11-17"},"refundAmount":{}}'); nested exception is com.fasterxml.jackson.databind.JsonMappingException: Can not construct instance of com.chegg.doms.model.request.EventRequest: no String-argument constructor/factory method to deserialize from String value ('{"orderLineId":"947359150","event":"pause","eventMetadata":{"resumeDate":"2018-11-17"},"refundAmount":{}}')
- at [Source: java.io.PushbackInputStream@498741d6; line: 1, column: 2] (through reference chain: java.util.ArrayList[0]) 
-21:03:35,614  The value is type of: String 

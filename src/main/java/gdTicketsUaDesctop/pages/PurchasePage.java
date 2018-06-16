@@ -21,10 +21,6 @@ public class PurchasePage {
             String getString() {
                 return "Приват 24";
             }
-        }, WEBMONEY {
-            String getString() {
-                return "Webmoney";
-            }
         };
 
         abstract String getString();

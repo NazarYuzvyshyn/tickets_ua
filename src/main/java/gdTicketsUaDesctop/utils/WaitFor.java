@@ -9,6 +9,7 @@ import static gdTicketsUaDesctop.utils.CommonServices.getUrl;
 import static gdTicketsUaDesctop.utils.WebDriverFactory.getDriver;
 import static gdTicketsUaDesctop.utils.WebElementServices.*;
 import static gdTicketsUaDesctop.utils.loggers.Logger.error;
+import static gdTicketsUaDesctop.utils.loggers.Logger.info;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 import static org.testng.Assert.assertTrue;
 
@@ -26,8 +27,10 @@ public class WaitFor {
     public static boolean waitConditionAndReturnStatus(By locator, WaitCondition waitFor, long timeout){
         try {
             WaitFor.waitCondition(locator, waitFor, timeout);
+            info("'waitConditionAndReturnStatus' returns 'true'.");
             return true;
         } catch (TimeoutException e) {
+            info("'waitConditionAndReturnStatus' returns 'false'.");
             return false;
         }
     }
@@ -55,7 +58,7 @@ public class WaitFor {
                     clickOn("Make focus on element", locator);
             }
         } catch (TimeoutException e) {
-            error(locator + " isn't " + waitFor.name());
+            error(locator + " IS NOT " + waitFor.name());
             throw new TimeoutException(e);
         }
     }

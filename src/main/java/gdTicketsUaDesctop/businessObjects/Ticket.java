@@ -1,5 +1,6 @@
 package gdTicketsUaDesctop.businessObjects;
 
+import gdTicketsUaDesctop.pages.resultPage.ExtraServices;
 import gdTicketsUaDesctop.utils.PropertyReader;
 import java.time.LocalDate;
 import java.util.Random;
@@ -12,75 +13,136 @@ import static java.lang.Integer.parseInt;
  */
 public class Ticket {
 //============ Desired Ticket =============//
-    private LocalDate forwardDate;
-    private String forwardCity;
-    private LocalDate backwardDate;
-    private String backwardCity;
+    private LocalDate departureDate;
+    private String departureCity;
+    private LocalDate arrivalDate;
+    private String arrivalCity;
 //============ Chosen Ticket ==============//
-    public String trainNumber;
-    public String trainNumberRound;
-    public String placeType;
-    public String placeTypeRound;
-    public String placeNumber;
-    public String placeNumberRound;
-    public String lastFirstNames;
-    public String price;
-    public String priceRound;
+    private String trainNumberAndName;
+//    public String trainNumberRound;
+    private String placeType;
+//    public String placeTypeRound;
+    private String placeNumber;
+//    public String placeNumberRound;
+    private String lastFirstNames;
+    private String price;
+//    public String priceRound;
+    public ExtraServices extraServices;
 
     /**
      * Make ticket object from property file
      * @param fileLocation      = short file location of ticket folder property
-     * @param exactOrRandomDate = "exact" - for exact date of departure.Gives this date after add count
-     *                          of days,which was defined in property,to current date.
-     *                          "random" - add count of days,which was defined in property,to current date
-     *                          and gets random date in this range.
+     * @param exactOrRandomDate = "exact" - for exact departureDate of departure.Gives this departureDate after add count
+     *                          of days,which was defined in property,to current departureDate.
+     *                          "random" - add count of days,which was defined in property,to current departureDate
+     *                          and gets random departureDate in this range.
      */
-    public Ticket(String fileLocation, String exactOrRandomDate) {
-        PropertyReader propertyReader = new PropertyReader(PROPERTY_LOCATION + "ticket/" + fileLocation);
-        int forwardDateRange = parseInt(propertyReader.getValue("departureDateRange"));
-        this.forwardDate = addDays(LocalDate.now(), forwardDateRange, exactOrRandomDate);
-
-        int backwardAfterDays = parseInt(propertyReader.getValue("backAfterDays"));
-        this.backwardDate = addDays(forwardDate, backwardAfterDays, exactOrRandomDate);
-
-        this.forwardCity = propertyReader.getValue("departureFrom");
-        this.backwardCity = propertyReader.getValue("arrivalTo");
-    }
+//    public Ticket(String fileLocation, String exactOrRandomDate) {
+//        PropertyReader propertyReader = new PropertyReader(PROPERTY_LOCATION + "ticket/" + fileLocation);
+//        int daysFromNow = parseInt(propertyReader.getValue("departureDaysFromNow"));
+//        this.departureDate = addDays(LocalDate.now(), daysFromNow, exactOrRandomDate);
+//
+//        this.departureCity = propertyReader.getValue("departureFrom");
+//        this.arrivalCity = propertyReader.getValue("arrivalTo");
+//    }
 
     /**
-     * Add count of days to given date if 'exactOrRandom' = 'exact' and return new date or,
-     * if 'exactOrRandom' = 'random' add count of days to given date and return random date in this range.
-     * @param date          = desired date
+     * Add count of days to given departureDate if 'exactOrRandom' = 'exact' and return new departureDate or,
+     * if 'exactOrRandom' = 'random' add count of days to given departureDate and return random departureDate in this range.
+     * @param date          = desired departureDate
      * @param days          = exactly days for adding or range
      * @param exactOrRandom = "random" or "exact"
-     * @return new date
+     * @return new departureDate
      */
-    private static LocalDate addDays(LocalDate date, int days, String exactOrRandom) {
+    private LocalDate addDays(LocalDate date, int days, String exactOrRandom) {
         if (exactOrRandom.equals("random")) {
             Random ran = new Random();
             days = ran.nextInt(days);
         }
         date = date.plusDays(days);
-        info(String.format("Was added %s days from now, new date: %s", days, date));
+        info(String.format("Was added %s days from now, new departure date: %s", days, date));
         return date;
     }
 
-    public String getForwardCity() {
-        return forwardCity;
+    public String getDepartureCity() {
+        return departureCity;
     }
 
-    public String getBackwardCity() {
-        return backwardCity;
+    public void setDepartureCity(String departureCity) {
+        info(String.format("Departure city: %s", departureCity));
+        this.departureCity = departureCity;
     }
 
-    public LocalDate getForwardDate() {
-        info(String.format("Forward date: %s", forwardDate));
-        return forwardDate;
+    public LocalDate getDepartureDate() {
+        return departureDate;
     }
 
-    public LocalDate getBackwardDate() {
-        info(String.format("Backward date: %s", backwardDate));
-        return backwardDate;
+    public void setDepartureDate(LocalDate departureDate) {
+        info(String.format("Departure date: %s", departureDate));
+        this.departureDate = departureDate;
     }
 
+    public void setDepartureDaysFromNow(int days){
+        departureDate = addDays(LocalDate.now(), days, "exact");
+    }
+
+    public void setDepartureDaysInRandomRange(int days){
+        departureDate = addDays(LocalDate.now(), days, "random");
+    }
+
+    public LocalDate getArrivalDate() {
+        return arrivalDate;
+    }
+
+    public void setArrivalDate(LocalDate arrivalDate) {
+        this.arrivalDate = arrivalDate;
+    }
+
+    public String getArrivalCity() {
+        return arrivalCity;
+    }
+
+    public void setArrivalCity(String arrivalCity) {
+        this.arrivalCity = arrivalCity;
+    }
+
+    public String getTrainNumberAndName() {
+        return trainNumberAndName;
+    }
+
+    public void setTrainNumberAndName(String trainNumberAndName) {
+        this.trainNumberAndName = trainNumberAndName;
+    }
+
+    public String getPlaceType() {
+        return placeType;
+    }
+
+    public void setPlaceType(String placeType) {
+        this.placeType = placeType;
+    }
+
+    public String getPlaceNumber() {
+        return placeNumber;
+    }
+
+    public void setPlaceNumber(String placeNumber) {
+        this.placeNumber = placeNumber;
+    }
+
+    public String getLastFirstNames() {
+        return lastFirstNames;
+    }
+
+    public void setLastFirstNames(String lastFirstNames) {
+        this.lastFirstNames = lastFirstNames;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
 }

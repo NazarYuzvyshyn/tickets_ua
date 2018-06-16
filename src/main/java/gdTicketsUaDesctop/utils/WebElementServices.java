@@ -1,6 +1,7 @@
 package gdTicketsUaDesctop.utils;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import java.util.List;
 import static gdTicketsUaDesctop.utils.CommonServices.pressKey;
