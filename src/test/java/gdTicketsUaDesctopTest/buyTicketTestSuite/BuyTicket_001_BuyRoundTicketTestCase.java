@@ -76,39 +76,39 @@ public class BuyTicket_001_BuyRoundTicketTestCase extends DefaultTestCase {
         attachLogsToStep();
     }
 
-    @Test
-    @Description("Buy Round Back Ticket")
-    public void BuyTicket_001_BuyRoundTicket() {
-
-        goTo(BASE_URL);
-
-        MainPage forwardTicketMainPage = new MainPage(forwardTicket);
-        forwardTicket.setDepartureCity("Львов");
-        forwardTicket.setArrivalCity("Киев");
-        forwardTicket.setDepartureDaysInRandomRange(7);
-        forwardTicketMainPage.getTicket();
-
-        MainPage backwardTicketMainPage = new MainPage(backwardTicket);
-        backwardTicket.setDepartureDate(forwardTicket.getDepartureDate().plusDays(3));
-        backwardTicketMainPage.getRoundTrip();
-        backwardTicketMainPage.search();
-
-        ResultPage forwardTicketResultPage = new ResultPage(passenger, forwardTicket);
-        forwardTicketResultPage.getRandomPlaceType(forwardTicketResultPage.getRandomTrain());
-        forwardTicketResultPage.getRandomPlace();
-        forwardTicketResultPage.fillContacts();
-        forwardTicketResultPage.fillPassengerForm();
-        forwardTicketResultPage.checkOneTea();
-        forwardTicketResultPage.checkCargo();
-        forwardTicketResultPage.submit();
-
-//=========== Choosing a backward ticket =============//
-        ResultPage backwardTicketResultPage = new ResultPage(passenger, backwardTicket);
-        backwardTicketResultPage.getRandomPlaceType(backwardTicketResultPage.getRandomTrain());
-        backwardTicketResultPage.getRandomPlace();
-        backwardTicketResultPage.checkTwoTea();
-        backwardTicketResultPage.checkNoBed();
-        backwardTicketResultPage.submit();
+//    @Test
+//    @Description("Buy Round Back Ticket")
+//    public void BuyTicket_001_BuyRoundTicket() {
+//
+//        goTo(BASE_URL);
+//
+//        MainPage forwardTicketMainPage = new MainPage(forwardTicket);
+//        forwardTicket.setDepartureCity("Львов");
+//        forwardTicket.setArrivalCity("Киев");
+//        forwardTicket.setDepartureDaysInRandomRange(7);
+//        forwardTicketMainPage.getTicket();
+//
+//        MainPage backwardTicketMainPage = new MainPage(backwardTicket);
+//        backwardTicket.setDepartureDate(forwardTicket.getDepartureDate().plusDays(3));
+//        backwardTicketMainPage.getRoundTrip();
+//        backwardTicketMainPage.search();
+//
+//        ResultPage forwardTicketResultPage = new ResultPage(passenger, forwardTicket);
+//        forwardTicketResultPage.getRandomPlaceType(forwardTicketResultPage.getRandomTrain());
+//        forwardTicketResultPage.getRandomPlace();
+//        forwardTicketResultPage.fillContacts();
+//        forwardTicketResultPage.fillPassengerForm();
+//        forwardTicketResultPage.checkOneTea();
+//        forwardTicketResultPage.checkCargo();
+//        forwardTicketResultPage.submit();
+//
+////=========== Choosing a backward ticket =============//
+//        ResultPage backwardTicketResultPage = new ResultPage(passenger, backwardTicket);
+//        backwardTicketResultPage.getRandomPlaceType(backwardTicketResultPage.getRandomTrain());
+//        backwardTicketResultPage.getRandomPlace();
+//        backwardTicketResultPage.checkTwoTea();
+//        backwardTicketResultPage.checkNoBed();
+//        backwardTicketResultPage.submit();
 
 ////=========== Checking of forwardTicket correctness =========//
 //
@@ -135,5 +135,5 @@ public class BuyTicket_001_BuyRoundTicketTestCase extends DefaultTestCase {
 //        assertThat(getUrl().contains(LIQPAY),
 //                "Redirect to payment page hasn't been fulfilled");
 
-    }
+//    }
 }

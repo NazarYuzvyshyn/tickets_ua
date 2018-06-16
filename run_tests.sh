@@ -40,4 +40,4 @@ mvn clean test -D"suiteXmlFile=testng-suites/buyTicket-suite.xml" -D"LOG_DIR=${L
 
 allure generate "${ALLURE_RESULTS}"
 
-#docker stop $(docker ps -q --filter "ancestor=${SELENOID_CONTAINER}")
+docker stop $(docker ps -q --filter "ancestor=${SELENOID_CONTAINER}")
