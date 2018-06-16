@@ -4,6 +4,7 @@ import gdTicketsUaDesctop.businessObjects.Passenger;
 import gdTicketsUaDesctop.businessObjects.Ticket;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -38,13 +39,13 @@ public class ResultPage {
     private By price = By.xpath("//*[contains(@class,'js-price-item-total')]");
     private By reserve = By.xpath("//*[@id='operation_type_1']");
     private By acceptOfferta = By.xpath("//*[@id='add-insurance']");
-    private By submit = By.xpath("//*[contains(@class,'buy-block')]//*[@type='submit']");
+    private By submit = By.xpath("//*[contains(@class,'content__block')]//*[@type='submit']");
     private By email = By.xpath("//*[@id='user_field[email]']");
     private By lastFirstNames = By.xpath("//*[@id='user_form']//*[@id='name']");
 
-    private By drink = By.xpath("//*[@id='drink']");
-    private By oneTea = By.xpath("//*[@id='services_service_5']");
-    private By twoTea = By.xpath("//*[@id='services_service_6']");
+    private By drink = By.xpath("//*[@for='drink']");
+    private By oneTea = By.xpath("//*[@for='services_service_5']");
+    private By twoTea = By.xpath("//*[@for='services_service_6']");
     private By cargo = By.xpath("//*[@name='cargo']");
     private By noBed = By.xpath("//*[@id='bed']");
 
@@ -69,6 +70,7 @@ public class ResultPage {
         waitCondition(By.xpath(trains), LIST_NOT_EMPTY, 10);
         List<WebElement> listOfTrains = getElements(By.xpath(trains));
         int index = random.nextInt(listOfTrains.size());
+        if (index == 0) index = 1;
 
         String trainNumberLocator = "(" + trains + ")" + "[" + index + "]" + "//strong";
         WebElement trainNumber = getElement(By.xpath(trainNumberLocator));
@@ -141,9 +143,9 @@ public class ResultPage {
     }
 
     private boolean checkDrink() {
-        if (waitConditionAndReturnStatus(drink, VISIBLE, 5)) {
+        try {
             clickOn("Напиток", drink);
-        } else {
+        } catch (WebDriverException e) {
             info("There is no option 'Напиток' for this train ticket");
             return false;
         }
@@ -152,30 +154,41 @@ public class ResultPage {
 
     public void checkOneTea() {
         if (checkDrink()) {
-            waitCondition(oneTea, VISIBLE, 2);
-            clickOn("1 чай", oneTea);
-        } else info("There is no option '1 чай' for this train ticket");
+            try {
+                clickOn("1 чай", oneTea);
+            } catch (WebDriverException e) {
+                info("There is no option '1 чай' for this train ticket");
+            }
+        }
     }
 
-    public void checkTwoTea(){
+    public void checkTwoTea() {
         if (checkDrink()) {
-            waitCondition(twoTea, VISIBLE, 2);
-            clickOn("2 чая", twoTea);
-        } else info("There is no option '2 чая' for this train ticket");
+            try {
+                clickOn("2 чая", twoTea);
+            } catch (WebDriverException e) {
+                info("There is no option '2 чая' for this train ticket");
+            }
+        }
     }
 
     public void checkNoBed() {
-        waitCondition(noBed, VISIBLE, 2);
-        clickOn("Без постельного белья", noBed);
+        try {
+            clickOn("Без постельного белья", noBed);
+        } catch (WebDriverException e) {
+            info("There is no option 'Без постельного белья' for this train ticket");
+        }
     }
 
     public void checkCargo() {
-        waitCondition(cargo, VISIBLE, 2);
-        clickOn("Дополнительный багаж ", cargo);
+        try {
+            clickOn("Дополнительный багаж", cargo);
+        } catch (WebDriverException e) {
+            info("There is no option 'Дополнительный багаж' for this train ticket");
+        }
     }
 
     public void reserve() {
-        waitCondition(reserve, ENABLE, 5);
         clickOn("Резервировать", reserve);
     }
 

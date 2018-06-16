@@ -83,11 +83,11 @@ public class Ticket {
     }
 
     public void setDepartureDaysFromNow(int days){
-        this.departureDate = addDays(LocalDate.now(), days, "exact");
+        departureDate = addDays(LocalDate.now(), days, "exact");
     }
 
     public void setDepartureDaysInRandomRange(int days){
-        this.departureDate = addDays(LocalDate.now(), days, "random");
+        departureDate = addDays(LocalDate.now(), days, "random");
     }
 
     public LocalDate getArrivalDate() {

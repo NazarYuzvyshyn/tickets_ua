@@ -33,8 +33,8 @@ public class WebDriverFactory {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setBrowserName(browser);
 //        capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVideo", true);
-        capabilities.setCapability("videoName", LocalDateTime.now().toString());
+//        capabilities.setCapability("enableVideo", true);
+//        capabilities.setCapability("videoName", LocalDateTime.now().toString());
         capabilities.setCapability("videoScreenSize", "1366x768");
 
         try {
@@ -44,8 +44,7 @@ public class WebDriverFactory {
         } catch (MalformedURLException e) {
             failTest(e.getMessage());
         }
-        moveToCoordinate(0, 0, getDriver());
-//        AllureLoggerHandler.info("Maximized window");
+//        moveToCoordinate(0, 0, getDriver());
     }
 
     private static String osVersion() {
