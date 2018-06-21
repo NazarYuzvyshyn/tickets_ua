@@ -11,9 +11,7 @@ public class Constants {
     public static final String JSON_REQUEST_TEMPLATES_LOCATION = "src/main/resources/requestTemplates/json/";
     public static final String XML_REQUEST_TEMPLATES_LOCATION = "src/main/resources/requestTemplates/xml/";
     public static final String DRIVER_LOCATION = "src/test/resources/driver/";
-//    public static final String LOG_FILE_DIR = System.getProperty("LOG_DIR");
-    public static final String LOG_FILE_DIR =
-        "/home/nazar/PROGRAMMIROVANIE/MY_JAVA/intellijProjects/tickets_ua/logs/";
+    public static final String LOG_FILE_DIR = System.getProperty("LOG_DIR");
 
     public static final String DOMS_EVENT_ENDPOINT =
             "http://digital-order-management.test.cheggnet.com/doms-api/rest/orderlines/events";

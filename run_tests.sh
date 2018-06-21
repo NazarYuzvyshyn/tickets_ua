@@ -28,7 +28,9 @@ docker_status=$(docker run -d \
                -e OVERRIDE_VIDEO_OUTPUT_DIR=${SCRIPT_PATH}/video/ \
                -v ${SCRIPT_PATH}/:/etc/selenoid/:ro ${SELENOID_CONTAINER})
 
-if [[ "${docker_status}" -ne 0 ]]; then
+arr=[125,126,127]
+if [[ "${arr[*]}" == *"${docker_status}"* ]]; then
+    echo "Docker response code: ${docker_status}"
     echo "Container ${SELENOID_CONTAINER} hasn't started, check issues."
     exit
 else
