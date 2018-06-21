@@ -2,11 +2,12 @@
 
 SCRIPT_PATH=$(cd "$(dirname "$0")"; pwd)
 ALLURE_RESULTS="${SCRIPT_PATH}/allure-results"
-export ${ALLURE_RESULTS}
+export ALLURE_RESULTS
 ALLURE_REPORT="${SCRIPT_PATH}/allure-report"
 LOG_DIR="${SCRIPT_PATH}/logs/"
+export LOG_DIR
 SELENOID_CONTAINER="aerokube/selenoid:latest-release"
-export ${SELENOID_CONTAINER}
+export SELENOID_CONTAINER
 
 if [[ -d "${ALLURE_RESULTS}" ]]; then
     echo "Removing folder ${ALLURE_RESULTS}"
