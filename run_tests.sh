@@ -2,9 +2,11 @@
 
 SCRIPT_PATH=$(cd "$(dirname "$0")"; pwd)
 ALLURE_RESULTS="${SCRIPT_PATH}/allure-results"
+export ${ALLURE_RESULTS}
 ALLURE_REPORT="${SCRIPT_PATH}/allure-report"
 LOG_DIR="${SCRIPT_PATH}/logs/"
 SELENOID_CONTAINER="aerokube/selenoid:latest-release"
+export ${SELENOID_CONTAINER}
 
 if [[ -d "${ALLURE_RESULTS}" ]]; then
     echo "Removing folder ${ALLURE_RESULTS}"
@@ -36,10 +38,3 @@ if [[ "${arr[*]}" == *"${docker_status}"* ]]; then
 else
     echo "Container ${SELENOID_CONTAINER} started."
 fi
-
-
-mvn clean test -D"suiteXmlFile=testng-suites/buyTicket-suite.xml" -D"LOG_DIR=${LOG_DIR}"
-
-allure generate "${ALLURE_RESULTS}"
-
-docker stop $(docker ps -q --filter "ancestor=${SELENOID_CONTAINER}")
