@@ -3,3 +3,6 @@ allure-results/*
 logs/*
 target/*
 video/*
+.idea/*
+.gitignore
+tickets_ua.iml
